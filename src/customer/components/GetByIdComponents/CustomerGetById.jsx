@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import CustomerService from "../../service/CustomerService";
+import CustomerService from "../../../service/CustomerService";
 import TableBodyComponent from "./TableBodyComponent";
 
 import GetAllButtonAtUpdateAndGetByIdComponent from "../../../GeneralComponents/GetAllButtonAtUpdateAndGetByIdComponent"

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import DeleteButtonComponent from "../../../GeneralComponents/DeleteButtonComponent.jsx";
-import CustomerService from "../../service/CustomerService.jsx";
+import CustomerService from "../../../service/CustomerService.jsx";
 
 import EditButtonAtGetByIdComponent from "../../../GeneralComponents/EditButtonAtGetByIdComponent.jsx";
 

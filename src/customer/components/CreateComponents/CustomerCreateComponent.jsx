@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CustomerService from "../../service/CustomerService";
+import CustomerService from "../../../service/CustomerService";
 import GetAllButtonAtUpdateAndGetByIdComponent from "../../../GeneralComponents/GetAllButtonAtCreateComponent"
 
 

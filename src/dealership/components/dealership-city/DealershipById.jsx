@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import DealershipService from "../../service/DealershipService";
+import DealershipService from "../../../service/DealershipService";
 import {Spinner} from "react-bootstrap";
 
 const DealershipById = (props) => {

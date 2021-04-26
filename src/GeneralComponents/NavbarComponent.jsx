@@ -3,7 +3,7 @@ import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 import LogoImage from "../images/logo.png"
 import styled from "styled-components";
-import DealershipService from "../dealership/service/DealershipService";
+import DealershipService from "../service/DealershipService";
 
 const Logo = styled.img`
   height: 50px;
