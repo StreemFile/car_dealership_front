@@ -3,7 +3,6 @@ import {Footer, FooterCopyright, FooterLogo, FooterCompanyInfo, FooterClickableI
 import CompanyService from "../service/CompanyService";
 
 const FooterComponent = () => {
-    debugger;
     const [companyInfo, setCompanyInfo] = useState({});
     CompanyService.getAll().then(result => setCompanyInfo(
         {
