@@ -1,16 +1,19 @@
 import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
 import DealershipService from "../../../service/DealershipService";
 import {Spinner} from "react-bootstrap";
 
 const DealershipById = (props) => {
-    const [id, setId] = useState(props.dealershipId);
+    const {city} = useParams();
+    const [id, setId] = useState("");
     const [dealership, setDealership] = useState({});
 
     useEffect(() => {
-        setId(props.dealershipId);
+        DealershipService.getIdByEnglishCityName(city).then(result => setId(result.data));
         DealershipService.getById(id).then(result => setDealership(result.data))
-    })
-    if (dealership.id !== props.dealershipId) {
+    }, [city, id])
+
+    if (dealership.id !== id) {
         return (
             <Spinner animation="border"/>
         )

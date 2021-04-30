@@ -5,17 +5,12 @@ import LogoImage from "../images/logo.png"
 import styled from "styled-components";
 import DealershipService from "../service/DealershipService";
 
-const Logo = styled.img`
-  height: 50px;
-  width: auto;
-`
-
 const NavbarComponent = (props) => {
     const [dealerships, setDealerships] = useState([]);
 
     useEffect(() => {
         DealershipService.getAll().then(res => setDealerships(res.data))
-    })
+    },[props])
 
     return (
         <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -30,17 +25,19 @@ const NavbarComponent = (props) => {
                                 return <NavDropdown.Item
                                     key={dealership.id}
                                     to={"/dealership/" + dealership.cityEnglish}
-                                    as={NavLink}
-                                    onClick={() => {
-                                        props.getDealership(dealership.id)
-                                    }}>
+                                    as={NavLink}>
                                          {dealership.city}
                                 </NavDropdown.Item>
                             })
                         }
                         <NavDropdown.Item to="/dealerships" as={NavLink}>Всі</NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link to="/automobiles" as={NavLink}>Автомобілі</Nav.Link>
+                    <NavDropdown title="Автомобілі" id="collasible-nav-dropdown">
+                        <NavDropdown.Item to="/orderedAutomobiles" as={NavLink}>Замовлені</NavDropdown.Item>
+                        <NavDropdown.Item to="/inStockAutomobiles" as={NavLink}>В наявності</NavDropdown.Item>
+                        <NavDropdown.Item to="/soldAutomobiles" as={NavLink}>Продані</NavDropdown.Item>
+                        <NavDropdown.Item to="/automobiles" as={NavLink}>Всі</NavDropdown.Item>
+                    </NavDropdown>
                 </Nav>
                 <Nav>
                     <NavDropdown title="Специфікації автомобіля" id="collasible-nav-dropdown">

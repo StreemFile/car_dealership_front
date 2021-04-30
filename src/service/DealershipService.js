@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-const DEALERSHIP_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/dealerships"
+const DEALERSHIP_API_BASE_URL = "http://localhost:8080/api/dealerships"
 
-class CompanyService extends Component {
+class DealershipService extends Component {
     constructor(props) {
         super(props);
 
@@ -30,6 +30,11 @@ class CompanyService extends Component {
         return axios.get(DEALERSHIP_API_BASE_URL + "/delete/" + id);
     }
 
+    getIdByEnglishCityName(city){
+        axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+        return axios.get(DEALERSHIP_API_BASE_URL + "/getIdByEnglishCityName/" + city)
+    }
+
     render() {
         return (
             <div>
@@ -39,4 +44,4 @@ class CompanyService extends Component {
     }
 }
 
-export default new CompanyService()
+export default new DealershipService();

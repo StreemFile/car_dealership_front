@@ -1,20 +1,15 @@
-import React, {Component} from 'react';
-import Logo from "../../../images/logo.png"
+import React from 'react';
+import {CompanyGetLeftSideContent, CompanyGetLogo, CompanyGetWrapper} from "../../../layouts/company/CompanyGetLayout";
 
-class Company extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {}
-    }
-
-    render() {
-        return (
-            <div>
-
-            </div>
-        )
-    }
+const Company = () => {
+    return (
+        <CompanyGetWrapper>
+            <CompanyGetLeftSideContent>
+                <CompanyGetLogo></CompanyGetLogo>
+                <h3>Твоє нове авто <br/> за вигідною ціною</h3>
+            </CompanyGetLeftSideContent>
+        </CompanyGetWrapper>
+    );
 }
 
-export default Company 
+export default Company;
