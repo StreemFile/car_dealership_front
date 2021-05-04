@@ -1,21 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import ExteriorColorService from "../../../service/ExteriorColorService";
+import ModelAndPackageService from "../../../service/ModelAndPackageService";
 import {Accordion, Button, Card} from "react-bootstrap";
 import AddModalComponent from "../AddModalComponent";
 import DeleteModalComponent from "../DeleteModalComponent";
 import ReadModalComponent from "../ReadModalComponent";
 import EditModalComponent from "../EditModalComponent";
 import AutomobileSpecificationsTableComponent from "../AutomobileSpecificationsTableComponent";
+import ModelAndPackageTableComponent from "./ModelAndPackageTableComponent";
+import ModelAndPackageReadModalComponent from "./ModelAndPackageReadModalComponent";
+import ModelAndPackageEditModalComponent from "./ModelAndPackageEditModalComponent";
+import ModelAndPackageDeleteModalComponent from "./ModelAndPackageDeleteModalComponent";
+import ModelAndPackageAddModalComponent from "./ModelAndPackageAddModalComponent";
 
 
-const ExteriorColorComponent = (props) => {
+const ModelAndPackageComponent = (props) => {
 
-    const [exteriorColors, setExteriorColors] = useState([]);
+    const [modelAndPackages, setModelAndPackages] = useState([]);
 
-    const [exteriorColorToAction, setExteriorColorToAction] = useState({});
-    const getExteriorColorToAction = (id) => {
-        ExteriorColorService.getById(id).then(result =>
-            setExteriorColorToAction(result.data))
+    const [modelAndPackageToAction, setModelAndPackageToAction] = useState({});
+
+    const getModelAndPackageToAction = (id) => {
+        ModelAndPackageService.getById(id).then(result =>
+            setModelAndPackageToAction(result.data))
     }
 
     const [showRead, setShowRead] = useState(false);
@@ -36,55 +42,47 @@ const ExteriorColorComponent = (props) => {
 
 
     useEffect(() => {
-        ExteriorColorService.getAll().then(res => setExteriorColors(res.data))
+        ModelAndPackageService.getAll().then(res => setModelAndPackages(res.data))
     })
 
     return (
         <Card>
-            <Accordion.Toggle style={{background: "#FFC107"}} as={Card.Header} eventKey="4">
-                Колір автомобіля
+            <Accordion.Toggle style={{background: "#FFC107"}} as={Card.Header} eventKey="2">
+                Модель
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey="4">
+            <Accordion.Collapse eventKey="2">
                 <Card.Body style={{background: "#FFF2CD"}}>
-                    <AutomobileSpecificationsTableComponent
-                        objects={exteriorColors}
-                        name="Колір"
-                        getObjectToAction={getExteriorColorToAction}
+                    <ModelAndPackageTableComponent
+                        objects={modelAndPackages}
+                        getObjectToAction={getModelAndPackageToAction}
                         handleShowRead={handleShowRead}
                         handleShowEdit={handleShowEdit}
                         handleShowDelete={handleShowDelete}
                     />
-                    <ReadModalComponent
+                    <ModelAndPackageReadModalComponent
                         show={showRead}
-                        name="Колір автомобіля"
-                        object={exteriorColorToAction}
-                        modalTitle="ExteriorColor details"
+                        object={modelAndPackageToAction}
                         handleClose={handleCloseRead}
                     />
                     {
-                        showEdit &&  <EditModalComponent
+                        showEdit &&  <ModelAndPackageEditModalComponent
                             show={showEdit}
-                            object={exteriorColorToAction}
-                            service={ExteriorColorService}
-                            modalTitle="Edit exteriorColor"
-                            name="Колір автомобіля"
+                            object={modelAndPackageToAction}
+                            service={ModelAndPackageService}
                             handleClose={handleCloseEdit}
                         />
                     }
-                    <DeleteModalComponent
+                    <ModelAndPackageDeleteModalComponent
                         show={showDelete}
-                        object={exteriorColorToAction}
-                        service={ExteriorColorService}
-                        modalTitle="Delete exteriorColor"
+                        object={modelAndPackageToAction}
+                        service={ModelAndPackageService}
                         handleClose={handleCloseDelete}
                     />
                     <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
-                    <AddModalComponent
+                    <ModelAndPackageAddModalComponent
                         show={showAdd}
                         handleClose={handleCloseAdd}
-                        service={ExteriorColorService}
-                        modalTitle="Add exteriorColor"
-                        cardTitle="Колір автомобіля"
+                        service={ModelAndPackageService}
                     />
                 </Card.Body>
             </Accordion.Collapse>
@@ -92,4 +90,4 @@ const ExteriorColorComponent = (props) => {
     );
 }
 
-export default ExteriorColorComponent;
+export default ModelAndPackageComponent;

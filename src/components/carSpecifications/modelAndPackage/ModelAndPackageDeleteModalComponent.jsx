@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {Alert, Button, Modal} from "react-bootstrap";
 
-const DeleteModalComponent = (props) => {
+const ModelAndPackageDeleteModalComponent = (props) => {
     const [name, setName] = useState("");
 
     const [isNameWrittenRight, setIsNameWrittenRight] = useState(true);
 
     const deleteObject = () => {
-        if (props.object.name === name) {
+        if (props.object.model === name) {
             props.service.delete(props.object.id);
             setIsNameWrittenRight(true);
             setName("");
@@ -20,7 +20,7 @@ const DeleteModalComponent = (props) => {
     return (
         <Modal show={props.show} onHide={props.handleClose} animation={true}>
             <Modal.Header>
-                <Modal.Title>{props.modalTitle}</Modal.Title>
+                <Modal.Title>Delete model</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {
@@ -28,7 +28,7 @@ const DeleteModalComponent = (props) => {
                     && <Alert variant="danger">
                         Невірно введені дані!
                     </Alert>}
-                Щоб видалити об'єкт введіть <strong>{props.object.name}</strong>
+                Щоб видалити об'єкт введіть <strong>{props.object.model}</strong>
                 <br/>
                 <form autoComplete="off">
                     <input
@@ -51,4 +51,4 @@ const DeleteModalComponent = (props) => {
     );
 }
 
-export default DeleteModalComponent;
+export default ModelAndPackageDeleteModalComponent;

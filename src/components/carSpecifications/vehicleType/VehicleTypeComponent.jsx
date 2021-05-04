@@ -47,6 +47,7 @@ const VehicleTypeComponent = (props) => {
             <Accordion.Collapse eventKey="0">
                 <Card.Body style={{background: "#FFF2CD"}}>
                     <AutomobileSpecificationsTableComponent
+                        name="Тип кузова"
                         objects={vehicleTypes}
                         getObjectToAction={getVehicleTypeToAction}
                         handleShowRead={handleShowRead}

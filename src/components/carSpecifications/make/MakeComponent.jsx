@@ -48,6 +48,7 @@ const MakeComponent = (props) => {
                 <Card.Body style={{background: "#FFF2CD"}}>
                     <AutomobileSpecificationsTableComponent
                         objects={makes}
+                        name="Марка"
                         getObjectToAction={getMakeToAction}
                         handleShowRead={handleShowRead}
                         handleShowEdit={handleShowEdit}

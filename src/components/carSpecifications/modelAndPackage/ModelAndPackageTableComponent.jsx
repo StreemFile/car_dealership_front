@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from "react-bootstrap";
 
-const AutomobileSpecificationsTableComponent = (props) => {
+const ModelAndPackageTableComponent = (props) => {
 
     const handleShowRead = (id) => {
         props.getObjectToAction(id)
@@ -22,7 +22,8 @@ const AutomobileSpecificationsTableComponent = (props) => {
         <table className="table table-warning">
             <thead>
             <tr>
-                <th scope="col">{props.name}</th>
+                <th scope="col">Модель</th>
+                <th scope="col">Комплектація</th>
                 <th scope="col">Опис</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -30,7 +31,8 @@ const AutomobileSpecificationsTableComponent = (props) => {
             <tbody>
             {props.objects.map(item => {
                 return <tr key={item.id}>
-                    <td>{item.name}</td>
+                    <td>{item.model}</td>
+                    <td>{item.pack}</td>
                     <td>{item.description}</td>
                     <td>
                         <Button variant="primary" onClick={() => handleShowRead(item.id)}>Read</Button>{' '}
@@ -44,4 +46,4 @@ const AutomobileSpecificationsTableComponent = (props) => {
     );
 }
 
-export default AutomobileSpecificationsTableComponent;
+export default ModelAndPackageTableComponent;

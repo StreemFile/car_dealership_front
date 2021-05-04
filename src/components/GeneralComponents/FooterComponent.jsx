@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Footer, FooterCopyright, FooterLogo, FooterCompanyInfo} from "../../layouts/FooterLayout";
 
 const FooterComponent = () => {
@@ -14,6 +14,7 @@ const FooterComponent = () => {
                 <br/>
                 Пошта: yourcar@gmail.com
             </FooterCompanyInfo>
+
         </Footer>
     );
 }

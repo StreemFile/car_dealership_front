@@ -3,7 +3,7 @@ import LogoImage from "../images/logoW.png"
 
 export const Footer = styled.div`
   padding-right: 15px;
-  height: 100px;
+  height: 100%;
   background-color: #212529;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -18,6 +18,7 @@ export const FooterLogo = styled.div`
 `
 
 export const FooterCopyright = styled.div`
+  margin: 5px;
   justify-self: center;
   align-self: end;
   font-size: 15px;

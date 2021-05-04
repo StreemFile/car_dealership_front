@@ -6,6 +6,7 @@ import MakeComponent from "./make/MakeComponent";
 import InteriorColorComponent from "./interiorColor/InteriorColorComponent";
 import ExteriorColorComponent from "./exteriorColor/ExteriorColorComponent";
 import ProducingCountryComponent from "./producingCountry/ProducingCountryComponent";
+import ModelAndPackageComponent from "./modelAndPackage/ModelAndPackageComponent";
 
 const AutomobileSpecificationComponent = () => {
     return (
@@ -13,15 +14,8 @@ const AutomobileSpecificationComponent = () => {
             <Accordion>
                 <VehicleTypeComponent/>
                 <MakeComponent/>
-                <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="2">
-                        Модель
-                    </Accordion.Toggle>
-                    <Accordion.Collapse eventKey="2">
-                        <Card.Body>Hello! I'm another body</Card.Body>
-                    </Accordion.Collapse>
-                </Card>
-               <InteriorColorComponent/>
+                <ModelAndPackageComponent/>
+                <InteriorColorComponent/>
                 <ExteriorColorComponent/>
                 <ProducingCountryComponent/>
             </Accordion>

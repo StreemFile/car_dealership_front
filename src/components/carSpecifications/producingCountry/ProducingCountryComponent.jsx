@@ -47,6 +47,7 @@ const ProducingCountryComponent = (props) => {
             <Accordion.Collapse eventKey="5">
                 <Card.Body style={{background: "#FFF2CD"}}>
                     <AutomobileSpecificationsTableComponent
+                        name="Країна пригнання"
                         objects={producingCountrys}
                         getObjectToAction={getProducingCountryToAction}
                         handleShowRead={handleShowRead}

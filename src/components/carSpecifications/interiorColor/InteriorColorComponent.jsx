@@ -48,6 +48,7 @@ const InteriorColorComponent = (props) => {
                 <Card.Body style={{background: "#FFF2CD"}}>
                     <AutomobileSpecificationsTableComponent
                         objects={interiorColors}
+                        name="Колір"
                         getObjectToAction={getInteriorColorToAction}
                         handleShowRead={handleShowRead}
                         handleShowEdit={handleShowEdit}
