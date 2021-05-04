@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-// const CUSTOMER_API_BASE_URL = "http://localhost:8080/api/customers"
-const CUSTOMER_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/customers"
+const CUSTOMER_API_BASE_URL = "http://localhost:8080/api/customers"
+// const CUSTOMER_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/customers"
 
 class CustomerService extends Component {
     constructor(props) {
