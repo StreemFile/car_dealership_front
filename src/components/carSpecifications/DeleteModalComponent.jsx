@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
 import {Alert, Button, Modal} from "react-bootstrap";
-import VehicleTypeService from "../../../service/VehicleTypeService";
 
-const VehicleTypeDeleteModalComponent = (props) => {
+const DeleteModalComponent = (props) => {
     const [name, setName] = useState("");
 
     const [isNameWrittenRight, setIsNameWrittenRight] = useState(true);
 
-    const deleteVehicleType = () => {
-        if (props.vehicleType.vehicleType === name) {
-            VehicleTypeService.delete(props.vehicleType.id);
+    const deleteObject = () => {
+        if (props.object.name === name) {
+            props.service.delete(props.object.id);
             setIsNameWrittenRight(true);
             setName("");
             props.handleClose();
@@ -21,15 +20,15 @@ const VehicleTypeDeleteModalComponent = (props) => {
     return (
         <Modal show={props.show} onHide={props.handleClose} animation={true}>
             <Modal.Header>
-                <Modal.Title>Delete vehicle type</Modal.Title>
+                <Modal.Title>{props.modalTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {
                     !isNameWrittenRight
                     && <Alert variant="danger">
-                        Невірно введений тип кузову!
+                        Невірно введені дані!
                     </Alert>}
-                Щоб видалити тип кузова введіть <strong>{props.vehicleType.vehicleType}</strong>.
+                Щоб видалити об'єкт введіть <strong>{props.object.name}</strong>.
                 <br/>
                 <form autoComplete="off">
                     <input
@@ -44,7 +43,7 @@ const VehicleTypeDeleteModalComponent = (props) => {
                 <Button variant="secondary" onClick={props.handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={deleteVehicleType}>
+                <Button variant="primary" onClick={deleteObject}>
                     Delete
                 </Button>
             </Modal.Footer>
@@ -52,4 +51,4 @@ const VehicleTypeDeleteModalComponent = (props) => {
     );
 }
 
-export default VehicleTypeDeleteModalComponent;
+export default DeleteModalComponent;

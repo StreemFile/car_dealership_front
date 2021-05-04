@@ -10,7 +10,6 @@ import CompanyGetLeftSideContentComponent from "./CompanyGetLeftSideContentCompo
 import CompanyGetPartnersComponents from "./CompanyGetPartnersComponents";
 import CompanyGetRightSideContentComponent from "./CompanyGetRightSideContentComponent";
 
-
 const CompanyComponent = () => {
     return (
         <CompanyGetWrapper>

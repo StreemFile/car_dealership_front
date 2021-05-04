@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import VehicleTypeService from "../../../service/VehicleTypeService";
+import ExteriorColorService from "../../../service/ExteriorColorService";
 import {Accordion, Button, Card} from "react-bootstrap";
 import AddModalComponent from "../AddModalComponent";
 import DeleteModalComponent from "../DeleteModalComponent";
@@ -8,14 +8,14 @@ import EditModalComponent from "../EditModalComponent";
 import AutomobileSpecificationsTableComponent from "../AutomobileSpecificationsTableComponent";
 
 
-const VehicleTypeComponent = (props) => {
+const ExteriorColorComponent = (props) => {
 
-    const [vehicleTypes, setVehicleTypes] = useState([]);
+    const [exteriorColors, setExteriorColors] = useState([]);
 
-    const [vehicleTypeToAction, setVehicleTypeToAction] = useState({});
-    const getVehicleTypeToAction = (id) => {
-        VehicleTypeService.getById(id).then(result =>
-            setVehicleTypeToAction(result.data))
+    const [exteriorColorToAction, setExteriorColorToAction] = useState({});
+    const getExteriorColorToAction = (id) => {
+        ExteriorColorService.getById(id).then(result =>
+            setExteriorColorToAction(result.data))
     }
 
     const [showRead, setShowRead] = useState(false);
@@ -36,54 +36,54 @@ const VehicleTypeComponent = (props) => {
 
 
     useEffect(() => {
-        VehicleTypeService.getAll().then(res => setVehicleTypes(res.data))
+        ExteriorColorService.getAll().then(res => setExteriorColors(res.data))
     })
 
     return (
         <Card>
-            <Accordion.Toggle style={{background: "#FFC107"}} as={Card.Header} eventKey="0">
-                Тип кузова
+            <Accordion.Toggle style={{background: "#FFC107"}} as={Card.Header} eventKey="4">
+                Колір автомобіля
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey="0">
+            <Accordion.Collapse eventKey="4">
                 <Card.Body style={{background: "#FFF2CD"}}>
                     <AutomobileSpecificationsTableComponent
-                        objects={vehicleTypes}
-                        getObjectToAction={getVehicleTypeToAction}
+                        objects={exteriorColors}
+                        getObjectToAction={getExteriorColorToAction}
                         handleShowRead={handleShowRead}
                         handleShowEdit={handleShowEdit}
                         handleShowDelete={handleShowDelete}
                     />
                     <ReadModalComponent
                         show={showRead}
-                        name="Тип кузова"
-                        object={vehicleTypeToAction}
-                        modalTitle="VehicleType details"
+                        name="Колір автомобіля"
+                        object={exteriorColorToAction}
+                        modalTitle="ExteriorColor details"
                         handleClose={handleCloseRead}
                     />
                     {
                         showEdit &&  <EditModalComponent
                             show={showEdit}
-                            object={vehicleTypeToAction}
-                            service={VehicleTypeService}
-                            modalTitle="Edit vehicleType"
-                            name="Тип кузова"
+                            object={exteriorColorToAction}
+                            service={ExteriorColorService}
+                            modalTitle="Edit exteriorColor"
+                            name="Колір автомобіля"
                             handleClose={handleCloseEdit}
                         />
                     }
                     <DeleteModalComponent
                         show={showDelete}
-                        object={vehicleTypeToAction}
-                        service={VehicleTypeService}
-                        modalTitle="Delete vehicleType"
+                        object={exteriorColorToAction}
+                        service={ExteriorColorService}
+                        modalTitle="Delete exteriorColor"
                         handleClose={handleCloseDelete}
                     />
                     <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
                     <AddModalComponent
                         show={showAdd}
                         handleClose={handleCloseAdd}
-                        service={VehicleTypeService}
-                        modalTitle="Add vehicleType"
-                        cardTitle="Тип кузова"
+                        service={ExteriorColorService}
+                        modalTitle="Add exteriorColor"
+                        cardTitle="Колір автомобіля"
                     />
                 </Card.Body>
             </Accordion.Collapse>
@@ -91,4 +91,4 @@ const VehicleTypeComponent = (props) => {
     );
 }
 
-export default VehicleTypeComponent;
+export default ExteriorColorComponent;

@@ -1,20 +1,20 @@
 import React from 'react';
 import {Button, Card} from "react-bootstrap";
 
-const VehicleTypeTableComponent = (props) => {
+const AutomobileSpecificationsTableComponent = (props) => {
 
     const handleShowRead = (id) => {
-        props.getVehicleTypeToAction(id)
+        props.getObjectToAction(id)
         props.handleShowRead();
     }
 
     const handleShowEdit = (id) => {
-        props.getVehicleTypeToAction(id)
+        props.getObjectToAction(id)
         props.handleShowEdit();
     }
 
     const handleShowDelete = (id) => {
-        props.getVehicleTypeToAction(id)
+        props.getObjectToAction(id)
         props.handleShowDelete();
     }
 
@@ -28,9 +28,9 @@ const VehicleTypeTableComponent = (props) => {
             </tr>
             </thead>
             <tbody>
-            {props.vehicleTypes.map(item => {
+            {props.objects.map(item => {
                 return <tr key={item.id}>
-                    <td>{item.vehicleType}</td>
+                    <td>{item.name}</td>
                     <td>{item.description}</td>
                     <td>
                         <Button variant="primary" onClick={() => handleShowRead(item.id)}>Read</Button>{' '}
@@ -44,4 +44,4 @@ const VehicleTypeTableComponent = (props) => {
     );
 }
 
-export default VehicleTypeTableComponent;
+export default AutomobileSpecificationsTableComponent;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import VehicleTypeService from "../../../service/VehicleTypeService";
+import MakeService from "../../../service/MakeService";
 import {Accordion, Button, Card} from "react-bootstrap";
 import AddModalComponent from "../AddModalComponent";
 import DeleteModalComponent from "../DeleteModalComponent";
@@ -8,14 +8,14 @@ import EditModalComponent from "../EditModalComponent";
 import AutomobileSpecificationsTableComponent from "../AutomobileSpecificationsTableComponent";
 
 
-const VehicleTypeComponent = (props) => {
+const MakeComponent = (props) => {
 
-    const [vehicleTypes, setVehicleTypes] = useState([]);
+    const [makes, setMakes] = useState([]);
 
-    const [vehicleTypeToAction, setVehicleTypeToAction] = useState({});
-    const getVehicleTypeToAction = (id) => {
-        VehicleTypeService.getById(id).then(result =>
-            setVehicleTypeToAction(result.data))
+    const [makeToAction, setMakeToAction] = useState({});
+    const getMakeToAction = (id) => {
+        MakeService.getById(id).then(result =>
+            setMakeToAction(result.data))
     }
 
     const [showRead, setShowRead] = useState(false);
@@ -36,54 +36,54 @@ const VehicleTypeComponent = (props) => {
 
 
     useEffect(() => {
-        VehicleTypeService.getAll().then(res => setVehicleTypes(res.data))
+        MakeService.getAll().then(res => setMakes(res.data))
     })
 
     return (
         <Card>
-            <Accordion.Toggle style={{background: "#FFC107"}} as={Card.Header} eventKey="0">
-                Тип кузова
+            <Accordion.Toggle style={{background: "#FFC107"}} as={Card.Header} eventKey="1">
+                Марка
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey="0">
+            <Accordion.Collapse eventKey="1">
                 <Card.Body style={{background: "#FFF2CD"}}>
                     <AutomobileSpecificationsTableComponent
-                        objects={vehicleTypes}
-                        getObjectToAction={getVehicleTypeToAction}
+                        objects={makes}
+                        getObjectToAction={getMakeToAction}
                         handleShowRead={handleShowRead}
                         handleShowEdit={handleShowEdit}
                         handleShowDelete={handleShowDelete}
                     />
                     <ReadModalComponent
                         show={showRead}
-                        name="Тип кузова"
-                        object={vehicleTypeToAction}
-                        modalTitle="VehicleType details"
+                        name="Марка"
+                        object={makeToAction}
+                        modalTitle="Make details"
                         handleClose={handleCloseRead}
                     />
                     {
                         showEdit &&  <EditModalComponent
                             show={showEdit}
-                            object={vehicleTypeToAction}
-                            service={VehicleTypeService}
-                            modalTitle="Edit vehicleType"
-                            name="Тип кузова"
+                            object={makeToAction}
+                            service={MakeService}
+                            modalTitle="Edit make"
+                            name="Марка"
                             handleClose={handleCloseEdit}
                         />
                     }
                     <DeleteModalComponent
                         show={showDelete}
-                        object={vehicleTypeToAction}
-                        service={VehicleTypeService}
-                        modalTitle="Delete vehicleType"
+                        object={makeToAction}
+                        service={MakeService}
+                        modalTitle="Delete make"
                         handleClose={handleCloseDelete}
                     />
                     <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
                     <AddModalComponent
                         show={showAdd}
                         handleClose={handleCloseAdd}
-                        service={VehicleTypeService}
-                        modalTitle="Add vehicleType"
-                        cardTitle="Тип кузова"
+                        service={MakeService}
+                        modalTitle="Add make"
+                        cardTitle="Марка"
                     />
                 </Card.Body>
             </Accordion.Collapse>
@@ -91,4 +91,4 @@ const VehicleTypeComponent = (props) => {
     );
 }
 
-export default VehicleTypeComponent;
+export default MakeComponent;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import VehicleTypeService from "../../../service/VehicleTypeService";
+import ProducingCountryService from "../../../service/ProducingCountryService";
 import {Accordion, Button, Card} from "react-bootstrap";
 import AddModalComponent from "../AddModalComponent";
 import DeleteModalComponent from "../DeleteModalComponent";
@@ -8,14 +8,14 @@ import EditModalComponent from "../EditModalComponent";
 import AutomobileSpecificationsTableComponent from "../AutomobileSpecificationsTableComponent";
 
 
-const VehicleTypeComponent = (props) => {
+const ProducingCountryComponent = (props) => {
 
-    const [vehicleTypes, setVehicleTypes] = useState([]);
+    const [producingCountrys, setProducingCountrys] = useState([]);
 
-    const [vehicleTypeToAction, setVehicleTypeToAction] = useState({});
-    const getVehicleTypeToAction = (id) => {
-        VehicleTypeService.getById(id).then(result =>
-            setVehicleTypeToAction(result.data))
+    const [producingCountryToAction, setProducingCountryToAction] = useState({});
+    const getProducingCountryToAction = (id) => {
+        ProducingCountryService.getById(id).then(result =>
+            setProducingCountryToAction(result.data))
     }
 
     const [showRead, setShowRead] = useState(false);
@@ -36,54 +36,54 @@ const VehicleTypeComponent = (props) => {
 
 
     useEffect(() => {
-        VehicleTypeService.getAll().then(res => setVehicleTypes(res.data))
+        ProducingCountryService.getAll().then(res => setProducingCountrys(res.data))
     })
 
     return (
         <Card>
-            <Accordion.Toggle style={{background: "#FFC107"}} as={Card.Header} eventKey="0">
-                Тип кузова
+            <Accordion.Toggle style={{background: "#FFC107"}} as={Card.Header} eventKey="5">
+                Країна пригнання
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey="0">
+            <Accordion.Collapse eventKey="5">
                 <Card.Body style={{background: "#FFF2CD"}}>
                     <AutomobileSpecificationsTableComponent
-                        objects={vehicleTypes}
-                        getObjectToAction={getVehicleTypeToAction}
+                        objects={producingCountrys}
+                        getObjectToAction={getProducingCountryToAction}
                         handleShowRead={handleShowRead}
                         handleShowEdit={handleShowEdit}
                         handleShowDelete={handleShowDelete}
                     />
                     <ReadModalComponent
                         show={showRead}
-                        name="Тип кузова"
-                        object={vehicleTypeToAction}
-                        modalTitle="VehicleType details"
+                        name="Країна пригнання"
+                        object={producingCountryToAction}
+                        modalTitle="ProducingCountry details"
                         handleClose={handleCloseRead}
                     />
                     {
                         showEdit &&  <EditModalComponent
                             show={showEdit}
-                            object={vehicleTypeToAction}
-                            service={VehicleTypeService}
-                            modalTitle="Edit vehicleType"
-                            name="Тип кузова"
+                            object={producingCountryToAction}
+                            service={ProducingCountryService}
+                            modalTitle="Edit producingCountry"
+                            name="Країна пригнання"
                             handleClose={handleCloseEdit}
                         />
                     }
                     <DeleteModalComponent
                         show={showDelete}
-                        object={vehicleTypeToAction}
-                        service={VehicleTypeService}
-                        modalTitle="Delete vehicleType"
+                        object={producingCountryToAction}
+                        service={ProducingCountryService}
+                        modalTitle="Delete producingCountry"
                         handleClose={handleCloseDelete}
                     />
                     <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
                     <AddModalComponent
                         show={showAdd}
                         handleClose={handleCloseAdd}
-                        service={VehicleTypeService}
-                        modalTitle="Add vehicleType"
-                        cardTitle="Тип кузова"
+                        service={ProducingCountryService}
+                        modalTitle="Add producingCountry"
+                        cardTitle="Країна пригнання"
                     />
                 </Card.Body>
             </Accordion.Collapse>
@@ -91,4 +91,4 @@ const VehicleTypeComponent = (props) => {
     );
 }
 
-export default VehicleTypeComponent;
+export default ProducingCountryComponent;

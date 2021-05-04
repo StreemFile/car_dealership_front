@@ -1,22 +1,21 @@
 import React, {useState} from 'react';
 import {Button, Card, Modal} from "react-bootstrap";
-import VehicleTypeService from "../../../service/VehicleTypeService";
 
-const VehicleTypeAddModalComponent = (props) => {
+const AddModalComponent = (props) => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
 
-    const addVehicleType = (event) => {
+    const add = (event) => {
         event.preventDefault();
-        const newVehicleType = {
+        const newObject = {
             id: null,
-            vehicleType: name,
+            name: name,
             description: description,
             created_at: null,
             modified_at: null
         }
-        VehicleTypeService.create(newVehicleType);
+        props.service.create(newObject);
         setName("");
         setDescription("");
         props.handleClose();
@@ -25,14 +24,14 @@ const VehicleTypeAddModalComponent = (props) => {
     return (
         <Modal show={props.show} onHide={props.handleClose} animation={true}>
             <Modal.Header>
-                <Modal.Title>Add vehicle type</Modal.Title>
+                <Modal.Title>{props.modalTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form autoComplete="off">
                     <Card
                         className="mb-2 text-center"
                     >
-                        <Card.Title>Тип кузова</Card.Title>
+                        <Card.Title>{props.cardTitle}</Card.Title>
                         <Card.Text>
                             <input
                                 type="text" value={name}
@@ -62,7 +61,7 @@ const VehicleTypeAddModalComponent = (props) => {
                 <Button variant="secondary" onClick={props.handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={addVehicleType}>
+                <Button variant="primary" onClick={add}>
                     Save
                 </Button>
             </Modal.Footer>
@@ -70,4 +69,4 @@ const VehicleTypeAddModalComponent = (props) => {
     );
 }
 
-export default VehicleTypeAddModalComponent;
+export default AddModalComponent;

@@ -1,29 +1,19 @@
-import React, {useState} from 'react';
-import {Footer, FooterCopyright, FooterLogo, FooterCompanyInfo, FooterClickableInfo} from "../../layouts/FooterLayout";
-import CompanyService from "../../service/CompanyService";
+import React from 'react';
+import {Footer, FooterCopyright, FooterLogo, FooterCompanyInfo} from "../../layouts/FooterLayout";
 
 const FooterComponent = () => {
-    const [companyInfo, setCompanyInfo] = useState({});
-    CompanyService.getAll().then(result => setCompanyInfo(
-        {
-            city: result.data[0].cityOfTheMainOffice,
-            address: result.data[0].addressOfTheMainOffice,
-            telephone: result.data[0].telephoneOfTheMainOffice,
-            email: result.data[0].email
-        }
-    ));
+
     return (
         <Footer>
             <FooterLogo></FooterLogo>
             <FooterCopyright><span>&#169;</span>Volodymyr Moisei</FooterCopyright>
             <FooterCompanyInfo>
-                Адрес: {companyInfo.city}, {companyInfo.address}
+                Адрес: Мамаївці, провулок Заводський 11
                 <br/>
-                Телефон: {companyInfo.telephone}
+                Телефон: +380996088364
                 <br/>
-                Пошта: {companyInfo.email}
+                Пошта: yourcar@gmail.com
             </FooterCompanyInfo>
-
         </Footer>
     );
 }
