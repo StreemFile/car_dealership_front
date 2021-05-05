@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import MakeService from "../../../service/MakeService";
-import {Accordion, Button, Card} from "react-bootstrap";
+import {Accordion, Button, Card, Spinner} from "react-bootstrap";
 import AddModalComponent from "../AddModalComponent";
 import DeleteModalComponent from "../DeleteModalComponent";
 import ReadModalComponent from "../ReadModalComponent";
@@ -32,7 +32,7 @@ const MakeComponent = (props) => {
 
     const [showDelete, setShowDelete] = useState(false);
     const handleCloseDelete = () => setShowDelete(false);
-    const handleShowDelete= () => setShowDelete(true);
+    const handleShowDelete = () => setShowDelete(true);
 
 
     useEffect(() => {
@@ -45,48 +45,52 @@ const MakeComponent = (props) => {
                 Марка
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
-                <Card.Body style={{background: "#FFF2CD"}}>
-                    <AutomobileSpecificationsTableComponent
-                        objects={makes}
-                        name="Марка"
-                        getObjectToAction={getMakeToAction}
-                        handleShowRead={handleShowRead}
-                        handleShowEdit={handleShowEdit}
-                        handleShowDelete={handleShowDelete}
-                    />
-                    <ReadModalComponent
-                        show={showRead}
-                        name="Марка"
-                        object={makeToAction}
-                        modalTitle="Make details"
-                        handleClose={handleCloseRead}
-                    />
-                    {
-                        showEdit &&  <EditModalComponent
-                            show={showEdit}
-                            object={makeToAction}
-                            service={MakeService}
-                            modalTitle="Edit make"
-                            name="Марка"
-                            handleClose={handleCloseEdit}
-                        />
-                    }
-                    <DeleteModalComponent
-                        show={showDelete}
-                        object={makeToAction}
-                        service={MakeService}
-                        modalTitle="Delete make"
-                        handleClose={handleCloseDelete}
-                    />
-                    <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
-                    <AddModalComponent
-                        show={showAdd}
-                        handleClose={handleCloseAdd}
-                        service={MakeService}
-                        modalTitle="Add make"
-                        cardTitle="Марка"
-                    />
-                </Card.Body>
+                {
+                    makes.length === 0
+                        ? <Spinner animation="border"/>
+                        : <Card.Body style={{background: "#FFF2CD"}}>
+                            <AutomobileSpecificationsTableComponent
+                                objects={makes}
+                                name="Марка"
+                                getObjectToAction={getMakeToAction}
+                                handleShowRead={handleShowRead}
+                                handleShowEdit={handleShowEdit}
+                                handleShowDelete={handleShowDelete}
+                            />
+                            <ReadModalComponent
+                                show={showRead}
+                                name="Марка"
+                                object={makeToAction}
+                                modalTitle="Make details"
+                                handleClose={handleCloseRead}
+                            />
+                            {
+                                showEdit && <EditModalComponent
+                                    show={showEdit}
+                                    object={makeToAction}
+                                    service={MakeService}
+                                    modalTitle="Edit make"
+                                    name="Марка"
+                                    handleClose={handleCloseEdit}
+                                />
+                            }
+                            <DeleteModalComponent
+                                show={showDelete}
+                                object={makeToAction}
+                                service={MakeService}
+                                modalTitle="Delete make"
+                                handleClose={handleCloseDelete}
+                            />
+                            <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
+                            <AddModalComponent
+                                show={showAdd}
+                                handleClose={handleCloseAdd}
+                                service={MakeService}
+                                modalTitle="Add make"
+                                cardTitle="Марка"
+                            />
+                        </Card.Body>
+                }
             </Accordion.Collapse>
         </Card>
     );

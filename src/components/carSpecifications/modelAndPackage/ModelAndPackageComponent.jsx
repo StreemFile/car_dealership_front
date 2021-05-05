@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ModelAndPackageService from "../../../service/ModelAndPackageService";
-import {Accordion, Button, Card} from "react-bootstrap";
+import {Accordion, Button, Card, Spinner} from "react-bootstrap";
 import AddModalComponent from "../AddModalComponent";
 import DeleteModalComponent from "../DeleteModalComponent";
 import ReadModalComponent from "../ReadModalComponent";
@@ -38,7 +38,7 @@ const ModelAndPackageComponent = (props) => {
 
     const [showDelete, setShowDelete] = useState(false);
     const handleCloseDelete = () => setShowDelete(false);
-    const handleShowDelete= () => setShowDelete(true);
+    const handleShowDelete = () => setShowDelete(true);
 
 
     useEffect(() => {
@@ -51,40 +51,44 @@ const ModelAndPackageComponent = (props) => {
                 Модель
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
-                <Card.Body style={{background: "#FFF2CD"}}>
-                    <ModelAndPackageTableComponent
-                        objects={modelAndPackages}
-                        getObjectToAction={getModelAndPackageToAction}
-                        handleShowRead={handleShowRead}
-                        handleShowEdit={handleShowEdit}
-                        handleShowDelete={handleShowDelete}
-                    />
-                    <ModelAndPackageReadModalComponent
-                        show={showRead}
-                        object={modelAndPackageToAction}
-                        handleClose={handleCloseRead}
-                    />
-                    {
-                        showEdit &&  <ModelAndPackageEditModalComponent
-                            show={showEdit}
-                            object={modelAndPackageToAction}
-                            service={ModelAndPackageService}
-                            handleClose={handleCloseEdit}
-                        />
-                    }
-                    <ModelAndPackageDeleteModalComponent
-                        show={showDelete}
-                        object={modelAndPackageToAction}
-                        service={ModelAndPackageService}
-                        handleClose={handleCloseDelete}
-                    />
-                    <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
-                    <ModelAndPackageAddModalComponent
-                        show={showAdd}
-                        handleClose={handleCloseAdd}
-                        service={ModelAndPackageService}
-                    />
-                </Card.Body>
+                {
+                    modelAndPackages.length === 0
+                        ? <Spinner animation="border"/>
+                        : <Card.Body style={{background: "#FFF2CD"}}>
+                            <ModelAndPackageTableComponent
+                                objects={modelAndPackages}
+                                getObjectToAction={getModelAndPackageToAction}
+                                handleShowRead={handleShowRead}
+                                handleShowEdit={handleShowEdit}
+                                handleShowDelete={handleShowDelete}
+                            />
+                            <ModelAndPackageReadModalComponent
+                                show={showRead}
+                                object={modelAndPackageToAction}
+                                handleClose={handleCloseRead}
+                            />
+                            {
+                                showEdit && <ModelAndPackageEditModalComponent
+                                    show={showEdit}
+                                    object={modelAndPackageToAction}
+                                    service={ModelAndPackageService}
+                                    handleClose={handleCloseEdit}
+                                />
+                            }
+                            <ModelAndPackageDeleteModalComponent
+                                show={showDelete}
+                                object={modelAndPackageToAction}
+                                service={ModelAndPackageService}
+                                handleClose={handleCloseDelete}
+                            />
+                            <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
+                            <ModelAndPackageAddModalComponent
+                                show={showAdd}
+                                handleClose={handleCloseAdd}
+                                service={ModelAndPackageService}
+                            />
+                        </Card.Body>
+                }
             </Accordion.Collapse>
         </Card>
     );

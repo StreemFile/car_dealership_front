@@ -2,6 +2,9 @@ import React from 'react';
 import {Button, Card, Modal} from "react-bootstrap";
 
 const ReadModalComponent = (props) => {
+
+
+
     return (
         <Modal show={props.show} onHide={props.handleClose}>
             <Modal.Header>

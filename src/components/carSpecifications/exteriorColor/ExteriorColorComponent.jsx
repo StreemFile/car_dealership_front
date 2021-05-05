@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ExteriorColorService from "../../../service/ExteriorColorService";
-import {Accordion, Button, Card} from "react-bootstrap";
+import {Accordion, Button, Card, Spinner} from "react-bootstrap";
 import AddModalComponent from "../AddModalComponent";
 import DeleteModalComponent from "../DeleteModalComponent";
 import ReadModalComponent from "../ReadModalComponent";
@@ -32,7 +32,7 @@ const ExteriorColorComponent = (props) => {
 
     const [showDelete, setShowDelete] = useState(false);
     const handleCloseDelete = () => setShowDelete(false);
-    const handleShowDelete= () => setShowDelete(true);
+    const handleShowDelete = () => setShowDelete(true);
 
 
     useEffect(() => {
@@ -45,48 +45,52 @@ const ExteriorColorComponent = (props) => {
                 Колір автомобіля
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="4">
-                <Card.Body style={{background: "#FFF2CD"}}>
-                    <AutomobileSpecificationsTableComponent
-                        objects={exteriorColors}
-                        name="Колір"
-                        getObjectToAction={getExteriorColorToAction}
-                        handleShowRead={handleShowRead}
-                        handleShowEdit={handleShowEdit}
-                        handleShowDelete={handleShowDelete}
-                    />
-                    <ReadModalComponent
-                        show={showRead}
-                        name="Колір автомобіля"
-                        object={exteriorColorToAction}
-                        modalTitle="ExteriorColor details"
-                        handleClose={handleCloseRead}
-                    />
-                    {
-                        showEdit &&  <EditModalComponent
-                            show={showEdit}
-                            object={exteriorColorToAction}
-                            service={ExteriorColorService}
-                            modalTitle="Edit exteriorColor"
-                            name="Колір автомобіля"
-                            handleClose={handleCloseEdit}
-                        />
-                    }
-                    <DeleteModalComponent
-                        show={showDelete}
-                        object={exteriorColorToAction}
-                        service={ExteriorColorService}
-                        modalTitle="Delete exteriorColor"
-                        handleClose={handleCloseDelete}
-                    />
-                    <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
-                    <AddModalComponent
-                        show={showAdd}
-                        handleClose={handleCloseAdd}
-                        service={ExteriorColorService}
-                        modalTitle="Add exteriorColor"
-                        cardTitle="Колір автомобіля"
-                    />
-                </Card.Body>
+                {
+                    exteriorColors.length === 0
+                        ? <Spinner animation="border"/>
+                        : <Card.Body style={{background: "#FFF2CD"}}>
+                            <AutomobileSpecificationsTableComponent
+                                objects={exteriorColors}
+                                name="Колір"
+                                getObjectToAction={getExteriorColorToAction}
+                                handleShowRead={handleShowRead}
+                                handleShowEdit={handleShowEdit}
+                                handleShowDelete={handleShowDelete}
+                            />
+                            <ReadModalComponent
+                                show={showRead}
+                                name="Колір автомобіля"
+                                object={exteriorColorToAction}
+                                modalTitle="ExteriorColor details"
+                                handleClose={handleCloseRead}
+                            />
+                            {
+                                showEdit && <EditModalComponent
+                                    show={showEdit}
+                                    object={exteriorColorToAction}
+                                    service={ExteriorColorService}
+                                    modalTitle="Edit exteriorColor"
+                                    name="Колір автомобіля"
+                                    handleClose={handleCloseEdit}
+                                />
+                            }
+                            <DeleteModalComponent
+                                show={showDelete}
+                                object={exteriorColorToAction}
+                                service={ExteriorColorService}
+                                modalTitle="Delete exteriorColor"
+                                handleClose={handleCloseDelete}
+                            />
+                            <Button variant="success" onClick={handleShowAdd}>Add</Button>{' '}
+                            <AddModalComponent
+                                show={showAdd}
+                                handleClose={handleCloseAdd}
+                                service={ExteriorColorService}
+                                modalTitle="Add exteriorColor"
+                                cardTitle="Колір автомобіля"
+                            />
+                        </Card.Body>
+                }
             </Accordion.Collapse>
         </Card>
     );
