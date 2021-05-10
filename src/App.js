@@ -11,23 +11,35 @@ import CustomerUpdateComponent from "./components/customer/UpdateComponents/Cust
 
 import CompanyComponent from "./components/company/CompanyComponent";
 import NavbarComponent from "./components/GeneralComponents/NavbarComponent";
-import DealershipById from "./components/dealership/DealershipById";
+import DealershipByIdComponent from "./components/dealership/DealershipByIdComponent";
 import FooterComponent from "./components/GeneralComponents/FooterComponent";
 import AutomobileSpecificationComponent from "./components/carSpecifications/AutomobileSpecificationComponent";
+import DealershipGetAllComponent from "./components/dealership/DealershipGetAllComponent";
 
 function App() {
+
+    const [isNeededToRerenderNavbar, setIsNeededToRerenderNavbar] = useState(false);
+
+    const rerenderNavbar = (boolean) => setIsNeededToRerenderNavbar(boolean)
+
     return (
         <BrowserRouter>
             <MainWrapper>
-                <NavbarComponent/>
+                <NavbarComponent
+                    isRerendered={isNeededToRerenderNavbar}
+                    rerenderNavbar={rerenderNavbar}
+                />
                 <Switch style={{overflow: 'auto'}}>
                     <Route path="/customers" exact component={CustomerGetAllComponent}/>
                     <Route path="/customers/create" exact component={CustomerCreateComponent}/>
                     <Route path="/customers/get/:id" exact component={CustomerGetById}/>
                     <Route path="/customers/edit/:id" exact component={CustomerUpdateComponent}/>
                     <Route path="/company" exact component={CompanyComponent}/>
-                    <Route path="/dealerships" exact component={CompanyComponent}/>
-                    <Route path="/dealership/:city" exact component={DealershipById}/>
+                    <Route path="/dealerships" exact component={DealershipGetAllComponent}/>
+                    <Route path="/dealership/:city" exact
+                           render={() => <DealershipByIdComponent
+                               rerenderNavbar={rerenderNavbar}/>}
+                    />
                     <Route path="/automobileSpecifications" exact component={AutomobileSpecificationComponent}/>
                 </Switch>
                 <FooterComponent/>

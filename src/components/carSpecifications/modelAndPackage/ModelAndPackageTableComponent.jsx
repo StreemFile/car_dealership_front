@@ -22,6 +22,7 @@ const ModelAndPackageTableComponent = (props) => {
         <table className="table table-warning">
             <thead>
             <tr>
+                <th scope="col">Марка</th>
                 <th scope="col">Модель</th>
                 <th scope="col">Комплектація</th>
                 <th scope="col">Опис</th>
@@ -31,6 +32,7 @@ const ModelAndPackageTableComponent = (props) => {
             <tbody>
             {props.objects.map(item => {
                 return <tr key={item.id}>
+                    <td>{item.make.name}</td>
                     <td>{item.model}</td>
                     <td>{item.pack}</td>
                     <td>{item.description}</td>

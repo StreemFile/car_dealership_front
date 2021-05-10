@@ -10,7 +10,9 @@ const NavbarComponent = (props) => {
 
     useEffect(() => {
         DealershipService.getAll().then(res => setDealerships(res.data))
-    },[props])
+        console.log(dealerships);
+        props.rerenderNavbar(false);
+    }, [props.isRerendered])
 
     return (
         <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -26,11 +28,11 @@ const NavbarComponent = (props) => {
                                     key={dealership.id}
                                     to={"/dealership/" + dealership.cityEnglish}
                                     as={NavLink}>
-                                         {dealership.city}
+                                        {dealership.city}
                                 </NavDropdown.Item>
                             })
                         }
-                        <Dropdown.Divider />
+                        <Dropdown.Divider/>
                         <NavDropdown.Item to="/dealerships" as={NavLink}>Всі</NavDropdown.Item>
                     </NavDropdown>
                     <NavDropdown title="Автомобілі" id="collasible-nav-dropdown">

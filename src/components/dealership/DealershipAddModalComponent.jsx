@@ -1,29 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, Modal} from "react-bootstrap";
 
-const AddModalComponent = (props) => {
+const DealershipAddModalComponent = (props) => {
 
     const [doesAlreadyExist, setDoesAlreadyExist] = useState(false);
     const [existingObjects, setExistingObjects] = useState([]);
 
-    const [name, setName] = useState("");
+    const [city, setCity] = useState("");
+    const [cityEnglish, setCityEnglish] = useState("");
+    const [address, setAddress] = useState("");
+    const [telephone, setTelephone] = useState("");
     const [description, setDescription] = useState("");
 
     const checkIfAlreadyExists = (objectToCheck, existingObjects) => {
         return existingObjects.filter(item =>
-            item.name === objectToCheck).length
+            item.city === objectToCheck.city
+            && item.address === objectToCheck.address
+        ).length
     }
 
     const add = (event) => {
         event.preventDefault();
-        if (checkIfAlreadyExists(name, existingObjects) === 0) {
-            const newObject = {
-                id: null,
-                name: name,
-                description: description,
-                created_at: null,
-                modified_at: null
-            }
+        const newObject = {
+            id: null,
+            city: city,
+            cityEnglish: cityEnglish,
+            address: address,
+            telephone: telephone,
+            company: props.company,
+            description: description,
+            created_at: null,
+            modified_at: null
+        }
+        if (checkIfAlreadyExists(newObject, existingObjects) === 0) {
             props.service.create(newObject);
             handleClear()
             props.handleClose();
@@ -33,7 +42,10 @@ const AddModalComponent = (props) => {
     }
 
     const handleClear = () => {
-        setName("");
+        setCity("");
+        setCityEnglish("");
+        setAddress("");
+        setTelephone("");
         setDescription("");
         setDoesAlreadyExist(false);
     }
@@ -58,12 +70,51 @@ const AddModalComponent = (props) => {
                     <Card
                         className="mb-2 text-center"
                     >
-                        <Card.Title>{props.cardTitle}</Card.Title>
+                        <Card.Title>Місто</Card.Title>
                         <Card.Text>
                             <input
-                                type="text" value={name}
+                                type="text" value={city}
                                 onChange={(event) =>
-                                    setName(event.target.value)}
+                                    setCity(event.target.value)}
+                                className="form-control m-3"
+                                style={{width: "93%"}}/>
+                        </Card.Text>
+                    </Card>
+                    <Card
+                        className="mb-2 text-center"
+                    >
+                        <Card.Title>Місто англійською</Card.Title>
+                        <Card.Text>
+                            <input
+                                type="text" value={cityEnglish}
+                                onChange={(event) =>
+                                    setCityEnglish(event.target.value)}
+                                className="form-control m-3"
+                                style={{width: "93%"}}/>
+                        </Card.Text>
+                    </Card>
+                    <Card
+                        className="mb-2 text-center"
+                    >
+                        <Card.Title>Адрес</Card.Title>
+                        <Card.Text>
+                            <input
+                                type="text" value={address}
+                                onChange={(event) =>
+                                    setAddress(event.target.value)}
+                                className="form-control m-3"
+                                style={{width: "93%"}}/>
+                        </Card.Text>
+                    </Card>
+                    <Card
+                        className="mb-2 text-center"
+                    >
+                        <Card.Title>Телефон</Card.Title>
+                        <Card.Text>
+                            <input
+                                type="text" value={telephone}
+                                onChange={(event) =>
+                                    setTelephone(event.target.value)}
                                 className="form-control m-3"
                                 style={{width: "93%"}}/>
                         </Card.Text>
@@ -99,4 +150,4 @@ const AddModalComponent = (props) => {
     );
 }
 
-export default AddModalComponent;
+export default DealershipAddModalComponent;

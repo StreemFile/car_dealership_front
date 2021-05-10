@@ -11,6 +11,7 @@ import ModelAndPackageReadModalComponent from "./ModelAndPackageReadModalCompone
 import ModelAndPackageEditModalComponent from "./ModelAndPackageEditModalComponent";
 import ModelAndPackageDeleteModalComponent from "./ModelAndPackageDeleteModalComponent";
 import ModelAndPackageAddModalComponent from "./ModelAndPackageAddModalComponent";
+import {SpinnerWrapperLayout, SpinnerWrapperGrid} from "../../../layouts/SpinnerWrapperLayout";
 
 
 const ModelAndPackageComponent = (props) => {
@@ -26,7 +27,10 @@ const ModelAndPackageComponent = (props) => {
 
     const [showRead, setShowRead] = useState(false);
     const handleCloseRead = () => setShowRead(false);
-    const handleShowRead = () => setShowRead(true);
+    const handleShowRead = () => {
+        console.log(modelAndPackages);
+        setShowRead(true);
+    }
 
     const [showEdit, setShowEdit] = useState(false);
     const handleCloseEdit = () => setShowEdit(false);
@@ -53,7 +57,11 @@ const ModelAndPackageComponent = (props) => {
             <Accordion.Collapse eventKey="2">
                 {
                     modelAndPackages.length === 0
-                        ? <Spinner animation="border"/>
+                        ? <SpinnerWrapperGrid>
+                            <SpinnerWrapperLayout>
+                                <Spinner animation="border"/>
+                            </SpinnerWrapperLayout>
+                        </SpinnerWrapperGrid>
                         : <Card.Body style={{background: "#FFF2CD"}}>
                             <ModelAndPackageTableComponent
                                 objects={modelAndPackages}
@@ -63,8 +71,9 @@ const ModelAndPackageComponent = (props) => {
                                 handleShowDelete={handleShowDelete}
                             />
                             <ModelAndPackageReadModalComponent
-                                show={showRead}
                                 object={modelAndPackageToAction}
+                                make={modelAndPackageToAction.make}
+                                show={showRead}
                                 handleClose={handleCloseRead}
                             />
                             {

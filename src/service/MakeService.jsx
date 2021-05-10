@@ -25,6 +25,10 @@ class MakeService extends Component{
         return axios.get(MAKE_API_BASE_URL + "/get/" + id);
     }
 
+    getByName(name){
+        return axios.get(MAKE_API_BASE_URL + "/getByName/" + name)
+    }
+
     update(make, makeId){
         return axios.post(MAKE_API_BASE_URL + "/edit/" + makeId, make);
     }

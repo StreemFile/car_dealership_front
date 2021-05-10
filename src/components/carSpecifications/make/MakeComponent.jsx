@@ -6,6 +6,7 @@ import DeleteModalComponent from "../DeleteModalComponent";
 import ReadModalComponent from "../ReadModalComponent";
 import EditModalComponent from "../EditModalComponent";
 import AutomobileSpecificationsTableComponent from "../AutomobileSpecificationsTableComponent";
+import {SpinnerWrapperLayout, SpinnerWrapperGrid} from "../../../layouts/SpinnerWrapperLayout";
 
 
 const MakeComponent = (props) => {
@@ -47,7 +48,11 @@ const MakeComponent = (props) => {
             <Accordion.Collapse eventKey="1">
                 {
                     makes.length === 0
-                        ? <Spinner animation="border"/>
+                        ? <SpinnerWrapperGrid>
+                            <SpinnerWrapperLayout>
+                                <Spinner animation="border"/>
+                            </SpinnerWrapperLayout>
+                        </SpinnerWrapperGrid>
                         : <Card.Body style={{background: "#FFF2CD"}}>
                             <AutomobileSpecificationsTableComponent
                                 objects={makes}

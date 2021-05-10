@@ -6,6 +6,7 @@ import DeleteModalComponent from "../DeleteModalComponent";
 import ReadModalComponent from "../ReadModalComponent";
 import EditModalComponent from "../EditModalComponent";
 import AutomobileSpecificationsTableComponent from "../AutomobileSpecificationsTableComponent";
+import {SpinnerWrapperLayout, SpinnerWrapperGrid} from "../../../layouts/SpinnerWrapperLayout";
 
 
 const ExteriorColorComponent = (props) => {
@@ -47,7 +48,11 @@ const ExteriorColorComponent = (props) => {
             <Accordion.Collapse eventKey="4">
                 {
                     exteriorColors.length === 0
-                        ? <Spinner animation="border"/>
+                        ? <SpinnerWrapperGrid>
+                            <SpinnerWrapperLayout>
+                                <Spinner animation="border"/>
+                            </SpinnerWrapperLayout>
+                        </SpinnerWrapperGrid>
                         : <Card.Body style={{background: "#FFF2CD"}}>
                             <AutomobileSpecificationsTableComponent
                                 objects={exteriorColors}
