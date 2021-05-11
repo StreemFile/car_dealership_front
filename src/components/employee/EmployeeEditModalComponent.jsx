@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, Modal} from "react-bootstrap";
 import DealershipService from "../../service/DealershipService";
+import {Button, Card, Modal} from "react-bootstrap";
 import {EmployeeSelectDealership} from "../../layouts/employee/EmployeeLayout";
 
-const EmployeeAddModalComponent = (props) => {
-
-    const [name, setName] = useState("");
+const EmployeeEditModalComponent = (props) => {
+    const [name, setName] = useState(props.employee.name);
     const [passport, setPassport] = useState("");
     const [telephone, setTelephone] = useState("");
     const [dealership, setDealership] = useState("");
@@ -14,52 +13,24 @@ const EmployeeAddModalComponent = (props) => {
 
     const [dealershipOption, setDealershipOption] = useState([]);
 
-    const [doesPassportAlreadyExist, setDoesPassportAlreadyExist] = useState(false);
-    const [doesTelephoneAlreadyExist, setDoesTelephoneAlreadyExist] = useState(false);
 
-    const [isAdded, setIsAdded] = useState(false);
-
-    const checkIfPassportAlreadyExists = () => {
-        return props.employees.filter(item =>
-            item.passport === passport).length
-    }
-
-    const checkIfTelephoneAlreadyExists = () => {
-        return props.employees.filter(item =>
-            item.telephone === telephone).length
-    }
-
-
-    const add = () => {
-        if (checkIfTelephoneAlreadyExists() === 0
-            && checkIfPassportAlreadyExists() === 0) {
-            let newEmployee = {
-                id: null,
-                name: name,
-                passport: passport,
-                telephone: telephone,
-                dealership: dealership,
-                salary: salary,
-                description: description,
-                created_at: null,
-                modified_at: null
-            }
-            props.service.create(newEmployee);
-            props.setIsAdded(true);
-            handleClear();
-            props.handleClose();
-        } else {
-            if (checkIfTelephoneAlreadyExists() !== 0
-                && checkIfPassportAlreadyExists() !== 0) {
-                setDoesPassportAlreadyExist(true);
-                setDoesTelephoneAlreadyExist(true);
-            } else if (checkIfTelephoneAlreadyExists() !== 0
-                && checkIfPassportAlreadyExists() === 0) {
-                setDoesTelephoneAlreadyExist(true);
-            } else {
-                setDoesPassportAlreadyExist(true);
-            }
+    const update = () => {
+debugger;
+        let newEmployee = {
+            id: props.employee.id,
+            name: name,
+            passport: passport,
+            telephone: telephone,
+            dealership: dealership,
+            salary: salary,
+            description: description,
+            created_at: props.employee.created_at,
+            modified_at: props.employee.modified_at
         }
+        props.service.update(newEmployee, newEmployee.id);
+        props.setIsEdited(true);
+        handleClear();
+        props.handleClose();
     }
 
     const getDealershipOptions = () => {
@@ -69,17 +40,15 @@ const EmployeeAddModalComponent = (props) => {
         }
     }
 
-    const addNewEmployee = () => {
-        if (isAdded) {
-            setIsAdded(false);
-            add();
-        }
-    }
-
     useEffect(() => {
         getDealershipOptions();
-        addNewEmployee()
-    }, [add, isAdded])
+            setName(props.employee.name);
+            setPassport(props.employee.passport);
+            setTelephone(props.employee.telephone);
+            setDealership(props.employee.dealership);
+            setSalary(props.employee.salary);
+            setDescription(props.employee.description);
+    }, [props.employee])
 
     const handleClear = () => {
         setName("");
@@ -87,9 +56,7 @@ const EmployeeAddModalComponent = (props) => {
         setTelephone("");
         setSalary("");
         setDescription("");
-        setDealership("Виберіть автосалон");
-        setDoesPassportAlreadyExist(false);
-        setDoesTelephoneAlreadyExist(false);
+        setDealership("");
     }
 
     return (
@@ -99,19 +66,18 @@ const EmployeeAddModalComponent = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <form autoComplete="off">
-                    {
-                        doesPassportAlreadyExist &&
-                        <div className="alert alert-danger" role="alert">
-                            Об'єкт з таким номером паспорта вже існує!
-                        </div>
-                    }
-                    {
-                        doesTelephoneAlreadyExist &&
-                        <div className="alert alert-danger" role="alert">
-                            Об'єкт з таким номером телефона вже існує!
-                        </div>
-                    }
-
+                    <Card
+                        className="mb-2 text-center"
+                    >
+                        <Card.Title>ID</Card.Title>
+                        <Card.Text>
+                            <input type="text"
+                                   value={props.employee.id}
+                                   className="form-control m-3"
+                                   style={{width: "93%"}}
+                                   disabled/>
+                        </Card.Text>
+                    </Card>
                     <Card
                         className="mb-2 text-center"
                     >
@@ -173,23 +139,19 @@ const EmployeeAddModalComponent = (props) => {
                     >
                         <Card.Title>Автосалон</Card.Title>
                         <Card.Text style={{paddingBottom: "12px"}}>
+                            {dealership !== undefined &&
                             <EmployeeSelectDealership required="true"
+                                                      value={dealership.id}
                                                       onChange={(event) => {
                                                           DealershipService.getById(event.target.value)
                                                               .then(result => setDealership(result.data))
                                                       }}
                             >
-                                <option
-                                    selected="selected"
-                                    style={{display: "none"}}
-                                >
-                                    Виберіть автосалон
-                                </option>
-
                                 {dealershipOption.map(item =>
                                     <option key={item.id} value={item.id}>{item.city}</option>
                                 )}
                             </EmployeeSelectDealership>
+                            }
                         </Card.Text>
                     </Card>
                     <Card
@@ -207,6 +169,30 @@ const EmployeeAddModalComponent = (props) => {
 
                         </Card.Text>
                     </Card>
+                    <Card
+                        className="mb-2 text-center"
+                    >
+                        <Card.Title>Дата створення</Card.Title>
+                        <Card.Text>
+                            <input type="text"
+                                   value={props.employee.created_at}
+                                   className="form-control m-3"
+                                   style={{width: "93%"}}
+                                   disabled/>
+                        </Card.Text>
+                    </Card>
+                    <Card
+                        className="mb-2 text-center"
+                    >
+                        <Card.Title>Дата останньої модифікації</Card.Title>
+                        <Card.Text>
+                            <input type="text"
+                                   value={props.employee.modified_at}
+                                   className="form-control m-3"
+                                   style={{width: "93%"}}
+                                   disabled/>
+                        </Card.Text>
+                    </Card>
                 </form>
             </Modal.Body>
             <Modal.Footer>
@@ -220,7 +206,7 @@ const EmployeeAddModalComponent = (props) => {
                     type="submit"
                     variant="primary"
                     onClick={() => {
-                        setIsAdded(true);
+                        update()
                     }}
                 >
                     Save
@@ -230,4 +216,4 @@ const EmployeeAddModalComponent = (props) => {
     );
 }
 
-export default EmployeeAddModalComponent;
+export default EmployeeEditModalComponent;

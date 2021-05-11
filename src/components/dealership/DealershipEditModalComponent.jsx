@@ -12,7 +12,7 @@ const DealershipEditModalComponent = (props) => {
     const [description, setDescription] = useState(props.dealership.description);
 
     const editDealership = () => {
-        const newCompany = {
+        const newDealership = {
             id: props.dealership.id,
             city: city,
             cityEnglish: cityEnglish,
@@ -24,7 +24,7 @@ const DealershipEditModalComponent = (props) => {
             modified_at: props.dealership.modified_at
         }
 
-        DealershipService.update(newCompany, newCompany.id);
+        DealershipService.update(newDealership, newDealership.id);
         props.handleClose();
     }
 

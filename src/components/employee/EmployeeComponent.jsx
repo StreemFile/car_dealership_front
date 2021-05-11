@@ -12,6 +12,7 @@ import EmployeeSearchAndFilterInputComponent from "./EmployeeSearchAndFilterInpu
 import EmployeeDeleteModalComponent from "./EmployeeDeleteModalComponent";
 import EmployeeAddModalComponent from "./EmployeeAddModalComponent";
 import EmployeeReadModalComponent from "./EmployeeReadModalComponent";
+import EmployeeEditModalComponent from "./EmployeeEditModalComponent";
 
 const EmployeeComponent = (props) => {
     const [employees, setEmployees] = useState([]);
@@ -34,6 +35,7 @@ const EmployeeComponent = (props) => {
     const [showEdit, setShowEdit] = useState(false);
     const handleCloseEdit = () => setShowEdit(false);
     const handleShowEdit = () => setShowEdit(true);
+    const [isEdited, setIsEdited] = useState(false);
 
     const [showAdd, setShowAdd] = useState(false);
     const handleCloseAdd = () => setShowAdd(false);
@@ -73,8 +75,9 @@ const EmployeeComponent = (props) => {
         setIsNeededToSort(false);
         setIsAdded(false);
         setIsDeleted(false);
+        setIsEdited(false);
         // EmployeeService.sortBy(selectedSortType).then(result => setEmployees(result.data));
-    }, [isNeededToSort, isAdded, isDeleted])
+    }, [isNeededToSort, isAdded, isDeleted, isEdited])
 
     return (
         <EmployeeWrapper>
@@ -121,6 +124,13 @@ const EmployeeComponent = (props) => {
                 show={showRead}
                 handleClose={handleCloseRead}
                 employee={employeeToAction}
+            />}
+            {showEdit && <EmployeeEditModalComponent
+                show={showEdit}
+                handleClose={handleCloseEdit}
+                employee={employeeToAction}
+                service={EmployeeService}
+                setIsEdited={setIsEdited}
             />}
 
         </EmployeeWrapper>
