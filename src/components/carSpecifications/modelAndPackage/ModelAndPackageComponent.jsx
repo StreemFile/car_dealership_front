@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ModelAndPackageService from "../../../service/ModelAndPackageService";
 import {Accordion, Button, Card, Spinner} from "react-bootstrap";
-import AddModalComponent from "../AddModalComponent";
-import DeleteModalComponent from "../DeleteModalComponent";
-import ReadModalComponent from "../ReadModalComponent";
-import EditModalComponent from "../EditModalComponent";
-import AutomobileSpecificationsTableComponent from "../AutomobileSpecificationsTableComponent";
 import ModelAndPackageTableComponent from "./ModelAndPackageTableComponent";
 import ModelAndPackageReadModalComponent from "./ModelAndPackageReadModalComponent";
 import ModelAndPackageEditModalComponent from "./ModelAndPackageEditModalComponent";
@@ -72,7 +67,6 @@ const ModelAndPackageComponent = (props) => {
                             />
                             <ModelAndPackageReadModalComponent
                                 object={modelAndPackageToAction}
-                                make={modelAndPackageToAction.make}
                                 show={showRead}
                                 handleClose={handleCloseRead}
                             />

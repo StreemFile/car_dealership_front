@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Button, Card, Modal} from "react-bootstrap";
 import {useInput} from "../../customHooks/customHooks";
 import CompanyService from "../../service/CompanyService";
@@ -13,7 +13,6 @@ const CompanyEditModalComponent = (props) => {
     const description = useInput(props.company.description);
 
     const editCompany = (event) => {
-        // debugger;
         event.preventDefault();
 
         const newCompany = {

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {CompanyGetRightSideContent} from "../../layouts/company/CompanyGetLayout";
 import CompanyService from "../../service/CompanyService";
-import {Button, Card, CardDeck, CardGroup, Modal, Spinner} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import CompanyDetailsModalComponent from "./CompanyDetailsModalComponent";
 import CompanyEditModalComponent from "./CompanyEditModalComponent";
 

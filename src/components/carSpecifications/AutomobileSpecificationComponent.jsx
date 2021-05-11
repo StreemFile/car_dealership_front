@@ -1,5 +1,5 @@
 import React from 'react';
-import {Accordion, Card} from "react-bootstrap";
+import {Accordion} from "react-bootstrap";
 import {CarSpecificationWrapper} from "../../layouts/carSpecifications/CarSpecificationLayout";
 import VehicleTypeComponent from "./vehicleType/VehicleTypeComponent";
 import MakeComponent from "./make/MakeComponent";

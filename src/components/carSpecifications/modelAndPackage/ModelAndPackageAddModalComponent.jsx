@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Card, Modal} from "react-bootstrap";
 import MakeService from "../../../service/MakeService";
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React  from 'react';
 import {Footer, FooterCopyright, FooterLogo, FooterCompanyInfo} from "../../layouts/FooterLayout";
 
 const FooterComponent = () => {

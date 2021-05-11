@@ -15,6 +15,7 @@ import DealershipByIdComponent from "./components/dealership/DealershipByIdCompo
 import FooterComponent from "./components/GeneralComponents/FooterComponent";
 import AutomobileSpecificationComponent from "./components/carSpecifications/AutomobileSpecificationComponent";
 import DealershipGetAllComponent from "./components/dealership/DealershipGetAllComponent";
+import EmployeeComponent from "./components/employee/EmployeeComponent";
 
 function App() {
 
@@ -41,6 +42,8 @@ function App() {
                                rerenderNavbar={rerenderNavbar}/>}
                     />
                     <Route path="/automobileSpecifications" exact component={AutomobileSpecificationComponent}/>
+                    <Route path="/employees" exact component={EmployeeComponent}/>
+
                 </Switch>
                 <FooterComponent/>
             </MainWrapper>

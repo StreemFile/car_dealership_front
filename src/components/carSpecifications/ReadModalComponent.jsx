@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Card, Modal} from "react-bootstrap";
+import AutomobileSpecificationInfoCardsComponent from "./AutomobileSpecificationInfoCardsComponent";
 
 const ReadModalComponent = (props) => {
     return (
@@ -8,36 +9,10 @@ const ReadModalComponent = (props) => {
                 <Modal.Title>{props.modalTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Card
-                    className="mb-2 text-center"
-                >
-                    <Card.Title>ID</Card.Title>
-                    <Card.Text>{props.object.id}</Card.Text>
-                </Card>
-                <Card
-                    className="mb-2 text-center"
-                >
-                    <Card.Title>{props.name}</Card.Title>
-                    <Card.Text>{props.object.name}</Card.Text>
-                </Card>
-                <Card
-                    className="mb-2 text-center"
-                >
-                    <Card.Title>Опис</Card.Title>
-                    <Card.Text>{props.object.description}</Card.Text>
-                </Card>
-                <Card
-                    className="mb-2 text-center"
-                >
-                    <Card.Title>Дата створення</Card.Title>
-                    <Card.Text>{props.object.created_at}</Card.Text>
-                </Card>
-                <Card
-                    className="mb-2 text-center"
-                >
-                    <Card.Title>Дата останньої модифікації</Card.Title>
-                    <Card.Text>{props.object.modified_at}</Card.Text>
-                </Card>
+                <AutomobileSpecificationInfoCardsComponent
+                    object={props.object}
+                    name={props.name}
+                />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={props.handleClose}>
