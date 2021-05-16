@@ -1,7 +1,6 @@
 import React from 'react';
 import {Accordion, Card} from "react-bootstrap";
 import {InfoCardAccordionWrapper} from "../../../layouts/InfoCardLayout";
-import CompanyInfoCardsComponent from "../../company/CompanyInfoCardsComponent";
 import AutomobileSpecificationInfoCardsComponent from "../AutomobileSpecificationInfoCardsComponent";
 
 const ModelAndPackageInfoCardsComponent = (props) => {

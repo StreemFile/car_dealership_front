@@ -1,61 +1,49 @@
 import React, {useEffect, useState} from 'react';
-import DealershipService from "../../service/DealershipService";
 import {Button, Card, Modal} from "react-bootstrap";
-import {EmployeeSelectDealership} from "../../layouts/employee/EmployeeLayout";
 
-const EmployeeEditModalComponent = (props) => {
-    const [name, setName] = useState(props.employee.name);
+const CustomerEditModalComponent = (props) => {
+    const [name, setName] = useState("");
     const [passport, setPassport] = useState("");
     const [telephone, setTelephone] = useState("");
-    const [dealership, setDealership] = useState("");
-    const [salary, setSalary] = useState("");
+    const [placeOfResidence, setPlaceOfResidence] = useState("");
+    const [address, setAddress] = useState("");
     const [description, setDescription] = useState("");
-
-    const [dealershipOption, setDealershipOption] = useState([]);
 
 
     const update = () => {
-        let newEmployee = {
-            id: props.employee.id,
+        let newCustomer = {
+            id: props.customer.id,
             name: name,
             passport: passport,
             telephone: telephone,
-            dealership: dealership,
-            salary: salary,
+            placeOfResidence: placeOfResidence,
+            address: address,
             description: description,
-            created_at: props.employee.created_at,
-            modified_at: props.employee.modified_at
+            created_at: props.customer.created_at,
+            modified_at: props.customer.modified_at
         }
-        props.service.update(newEmployee, newEmployee.id);
+        props.service.update(newCustomer, newCustomer.id);
         props.setIsEdited(true);
         handleClear();
         props.handleClose();
     }
 
-    const getDealershipOptions = () => {
-        if (dealershipOption.length === 0) {
-            DealershipService.getAll().then(result =>
-                setDealershipOption(result.data));
-        }
-    }
-
     useEffect(() => {
-        getDealershipOptions();
-            setName(props.employee.name);
-            setPassport(props.employee.passport);
-            setTelephone(props.employee.telephone);
-            setDealership(props.employee.dealership);
-            setSalary(props.employee.salary);
-            setDescription(props.employee.description);
-    }, [props.employee])
+        setName(props.customer.name);
+        setPassport(props.customer.passport);
+        setTelephone(props.customer.telephone);
+        setPlaceOfResidence(props.customer.placeOfResidence);
+        setAddress(props.customer.address);
+        setDescription(props.customer.description);
+    }, [props.customer])
 
     const handleClear = () => {
         setName("");
         setPassport("");
         setTelephone("");
-        setSalary("");
+        setPlaceOfResidence("");
+        setAddress("");
         setDescription("");
-        setDealership("");
     }
 
     return (
@@ -71,7 +59,7 @@ const EmployeeEditModalComponent = (props) => {
                         <Card.Title>ID</Card.Title>
                         <Card.Text>
                             <input type="text"
-                                   value={props.employee.id}
+                                   value={props.customer.id}
                                    className="form-control m-3"
                                    style={{width: "93%"}}
                                    disabled/>
@@ -122,12 +110,12 @@ const EmployeeEditModalComponent = (props) => {
                     <Card
                         className="mb-2 text-center"
                     >
-                        <Card.Title>Зарплата</Card.Title>
+                        <Card.Title>Місто проживання</Card.Title>
                         <Card.Text>
                             <input
-                                type="text" value={salary}
+                                type="text" value={placeOfResidence}
                                 onChange={(event) =>
-                                    setSalary(event.target.value)}
+                                    setPlaceOfResidence(event.target.value)}
                                 className="form-control m-3"
                                 placeholder="Введіть комплектацію"
                                 style={{width: "93%"}}/>
@@ -136,21 +124,15 @@ const EmployeeEditModalComponent = (props) => {
                     <Card
                         className="mb-2 text-center"
                     >
-                        <Card.Title>Автосалон</Card.Title>
-                        <Card.Text style={{paddingBottom: "12px"}}>
-                            {dealership !== undefined &&
-                            <EmployeeSelectDealership required="true"
-                                                      value={dealership.id}
-                                                      onChange={(event) => {
-                                                          DealershipService.getById(event.target.value)
-                                                              .then(result => setDealership(result.data))
-                                                      }}
-                            >
-                                {dealershipOption.map(item =>
-                                    <option key={item.id} value={item.id}>{item.city}</option>
-                                )}
-                            </EmployeeSelectDealership>
-                            }
+                        <Card.Title>Адрес</Card.Title>
+                        <Card.Text>
+                            <input
+                                type="text" value={address}
+                                onChange={(event) =>
+                                    setAddress(event.target.value)}
+                                className="form-control m-3"
+                                placeholder="Введіть комплектацію"
+                                style={{width: "93%"}}/>
                         </Card.Text>
                     </Card>
                     <Card
@@ -174,7 +156,7 @@ const EmployeeEditModalComponent = (props) => {
                         <Card.Title>Дата створення</Card.Title>
                         <Card.Text>
                             <input type="text"
-                                   value={props.employee.created_at}
+                                   value={props.customer.created_at}
                                    className="form-control m-3"
                                    style={{width: "93%"}}
                                    disabled/>
@@ -186,7 +168,7 @@ const EmployeeEditModalComponent = (props) => {
                         <Card.Title>Дата останньої модифікації</Card.Title>
                         <Card.Text>
                             <input type="text"
-                                   value={props.employee.modified_at}
+                                   value={props.customer.modified_at}
                                    className="form-control m-3"
                                    style={{width: "93%"}}
                                    disabled/>
@@ -215,4 +197,4 @@ const EmployeeEditModalComponent = (props) => {
     );
 }
 
-export default EmployeeEditModalComponent;
+export default CustomerEditModalComponent;
