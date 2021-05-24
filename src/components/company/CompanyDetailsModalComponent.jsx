@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, Card, Modal} from "react-bootstrap";
-import {CompanyGetAdminDescriptionText} from "../../layouts/company/CompanyGetLayout";
+import {Button, Modal} from "react-bootstrap";
 import CompanyInfoCardsComponent from "./CompanyInfoCardsComponent";
 
 const CompanyDetailsModalComponent = (props) => {

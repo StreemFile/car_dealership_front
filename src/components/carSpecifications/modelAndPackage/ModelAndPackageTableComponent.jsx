@@ -30,7 +30,7 @@ const ModelAndPackageTableComponent = (props) => {
             </tr>
             </thead>
             <tbody>
-            {props.objects.map(item => {
+            {props.objects.sort((a,b) => a.make.name > b.make.name ? 1:-1).map(item => {
                 return <tr key={item.id}>
                     <td>{item.make.name}</td>
                     <td>{item.model}</td>

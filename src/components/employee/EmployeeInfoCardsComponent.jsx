@@ -1,5 +1,5 @@
 import React from 'react';
-import {Accordion, Card, Modal} from "react-bootstrap";
+import {Accordion, Card} from "react-bootstrap";
 import {InfoCardAccordionWrapper} from "../../layouts/InfoCardLayout";
 import DealershipInfoCardsComponent from "../dealership/DealershipInfoCardsComponent";
 

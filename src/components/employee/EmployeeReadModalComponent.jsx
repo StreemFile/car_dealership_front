@@ -1,7 +1,5 @@
 import React from 'react';
-import {Accordion, Button, Card, Modal} from "react-bootstrap";
-import {InfoCardAccordionWrapper} from "../../layouts/InfoCardLayout";
-import DealershipInfoCardsComponent from "../dealership/DealershipInfoCardsComponent";
+import {Button, Modal} from "react-bootstrap";
 import EmployeeInfoCardsComponent from "./EmployeeInfoCardsComponent";
 
 const EmployeeReadModalComponent = (props) => {

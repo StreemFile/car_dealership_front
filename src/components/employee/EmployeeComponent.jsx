@@ -77,7 +77,7 @@ const EmployeeComponent = (props) => {
         setIsDeleted(false);
         setIsEdited(false);
         // EmployeeService.sortBy(selectedSortType).then(result => setEmployees(result.data));
-    }, [isNeededToSort, isAdded, isDeleted, isEdited])
+    }, [isNeededToSort, isAdded, isDeleted, isEdited,employees])
 
     return (
         <EmployeeWrapper>

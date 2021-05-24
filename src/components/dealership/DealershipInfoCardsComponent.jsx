@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Accordion, Card} from "react-bootstrap";
 import CompanyInfoCardsComponent from "../company/CompanyInfoCardsComponent";
 import {InfoCardAccordionWrapper} from "../../layouts/InfoCardLayout";

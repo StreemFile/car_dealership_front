@@ -70,7 +70,7 @@ const CustomerComponent = (props) => {
         setIsAdded(false);
         setIsDeleted(false);
         setIsEdited(false);
-    }, [isNeededToSort, isAdded, isDeleted, isEdited])
+    }, [isNeededToSort, isAdded, isDeleted, isEdited,customers])
 
     return (
         <CustomerWrapper>

@@ -38,6 +38,8 @@ const NavbarComponent = (props) => {
                         <NavDropdown.Item to="/inStockAutomobiles" as={NavLink}>В наявності</NavDropdown.Item>
                         <NavDropdown.Item to="/soldAutomobiles" as={NavLink}>Продані</NavDropdown.Item>
                         <NavDropdown.Item to="/automobiles" as={NavLink}>Всі</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item to="/automobile/add" as={NavLink}>Додати</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Nav>

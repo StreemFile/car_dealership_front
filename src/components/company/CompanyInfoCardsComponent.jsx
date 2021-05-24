@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Modal} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import {CompanyGetAdminDescriptionText} from "../../layouts/company/CompanyGetLayout";
 
 const CompanyInfoCardsComponent = (props) => {
