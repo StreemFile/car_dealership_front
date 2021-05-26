@@ -1,44 +1,43 @@
 import React, {useState} from 'react';
 import {Alert, Button, Modal} from "react-bootstrap";
-import { useHistory } from 'react-router-dom'
+import {useHistory} from "react-router-dom";
 
-const DealershipDeleteModalComponent = (props) => {
-    const [city, setCity] = useState("");
+const AutomobileDeleteModalComponent = (props) => {
     const history = useHistory();
+    const [vin, setVin] = useState("");
 
-    const [isCityWrittenRight, setIsCityWrittenRight] = useState(true);
+    const [isVinWrittenRight, setIsVinWrittenRight] = useState(true);
 
     const deleteObject = () => {
-        if (props.object.city === city) {
+        if (props.object.vin === vin) {
             props.service.delete(props.object.id);
-            props.rerenderNavbar(true);
-            setIsCityWrittenRight(true);
-            setCity("");
+            setIsVinWrittenRight(true);
+            setVin("");
             props.handleClose();
-            history.push("/dealerships")
+            history.push("/automobiles")
         } else {
-            setIsCityWrittenRight(false);
+            setIsVinWrittenRight(false);
         }
     }
 
     return (
         <Modal show={props.show} onHide={props.handleClose} animation={true}>
             <Modal.Header>
-                <Modal.Title>Delete dealership</Modal.Title>
+                <Modal.Title>Delete automobile</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {
-                    !isCityWrittenRight
+                    !isVinWrittenRight
                     && <Alert variant="danger">
                         Невірно введені дані!
                     </Alert>}
-                Щоб видалити об'єкт введіть <strong>{props.object.city}</strong>
+                Щоб видалити об'єкт введіть <strong>{props.object.vin}</strong>
                 <br/>
                 <form autoComplete="off">
                     <input
-                        type="text" value={city}
+                        type="text" value={vin}
                         onChange={(event) =>
-                            setCity(event.target.value)}
+                            setVin(event.target.value)}
                         className="form-control m-3"
                         style={{width: "93%"}}/>
                 </form>
@@ -55,4 +54,4 @@ const DealershipDeleteModalComponent = (props) => {
     );
 }
 
-export default DealershipDeleteModalComponent;
+export default AutomobileDeleteModalComponent;

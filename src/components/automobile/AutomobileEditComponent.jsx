@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import {InteriorFeaturesOptions} from "./automobileAddCheckboxOptions/InteriorFeaturesOptions";
 import {TyresAndWheelsOptions} from "./automobileAddCheckboxOptions/TyresAndWheelsOptions";
 import {v4 as uuidv4} from "uuid";
@@ -234,59 +234,6 @@ const AutomobileEditComponent = (props) => {
     const [actualPrice, setActualPrice] = useState("");
     const [expectedSellingPrice, setExpectedSellingPrice] = useState("");
 
-    const add = (event) => {
-        event.preventDefault();
-
-        let newAutomobile = {
-            id: automobile.id,
-            vehicleType: getVehicleTypeToSet(),
-            exportedFrom: getExportedFromToSet(),
-            modelAndPackage: getModelToSet(),
-            drive: drive,
-            engine: {
-                fuelType: fuelType,
-                transmissionType: transmissionType,
-                cubicCapacity: cubicCapacity,
-                powerPS: powerPS,
-                powerKW: powerKW,
-                description: ""
-            },
-            exteriorColor: getExteriorColorToSet(),
-            parkingSensors: parkingSensors.filter(item => item.isChosen).map(item => item.value),
-            securities: securities.filter(item => item.isChosen).map(item => item.value),
-            headlightsType: headlightsType,
-            tyresAndWheels: tyresAndWheels.filter(item => item.isChosen).map(item => item.value),
-            numberOfDoors: numberOfDoors,
-            interiorColor: getInteriorColorToSet(),
-            interiorMaterial: interiorMaterial,
-            interiorFeatures: interiorFeatures.filter(item => item.isChosen).map(item => item.value),
-            numberOfSeats: numberOfSeats,
-            extras: extras.filter(item => item.isChosen).map(item => item.value),
-            mileage: mileage,
-            manufactureYear: manufactureYear,
-            vin: vin,
-            availability: isAvailable ? "В наявності" : "Замовлений",
-            actualPrice: actualPrice,
-            expectedSellingPrice: expectedSellingPrice,
-            dealership: dealership,
-            title: title,
-            description: description,
-            created_at: automobile.created_at,
-            modified_at: new Date().toISOString()
-        }
-        AutomobileService.create(newAutomobile);
-        if (!isAvailable) {
-            let automobileInOrder = {
-                id: uuidv4().toString(),
-                description: description,
-                automobile: newAutomobile,
-                expectedArrivalDate: expectedArrivalDate,
-                created_at: new Date().toISOString(),
-                modified_at: new Date().toISOString()
-            }
-            AutomobileInOrderService.create(automobileInOrder)
-        }
-    }
     useEffect(() => {
         if (automobile === null) {
             AutomobileService.getById(id).then(result => setAutomobile(result.data));
@@ -354,14 +301,15 @@ const AutomobileEditComponent = (props) => {
             setTitle(automobile.title)
             setDescription(automobile.description)
             if(automobile.availability === "Замовлений"){
-                AutomobileInOrderService.getByAutomobileId(automobile.id).then(result => setAutomobileInOrder(result.data))
+                debugger;
+                AutomobileInOrderService.getByAutomobileId(automobile.id).then(result => {
+                    setAutomobileInOrder(result.data)
+                    setExpectedArrivalDate(result.data.expectedArrivalDate)
+                })
                 setIsAvailable(false);
             } else {
                 setIsAvailable(true);
             }
-        }
-        if(automobileInOrder !== null) {
-            setExpectedArrivalDate(automobileInOrder.expectedArrivalDate)
         }
         if (vehicleTypeOptions.length === 0) {
             VehicleTypeService.getAll().then(result => setVehicleTypeOptions(result.data));
@@ -384,7 +332,61 @@ const AutomobileEditComponent = (props) => {
         if (dealershipOption.length === 0) {
             DealershipService.getAll().then(result => setDealershipOption(result.data));
         }
-    }, [makeOptions, vehicleTypeOptions, automobile, automobileInOrder])
+    }, [automobile])
+
+    const add = (event) => {
+        event.preventDefault();
+
+        let newAutomobile = {
+            id: automobile.id,
+            vehicleType: getVehicleTypeToSet(),
+            exportedFrom: getExportedFromToSet(),
+            modelAndPackage: getModelToSet(),
+            drive: drive,
+            engine: {
+                fuelType: fuelType,
+                transmissionType: transmissionType,
+                cubicCapacity: cubicCapacity,
+                powerPS: powerPS,
+                powerKW: powerKW,
+                description: ""
+            },
+            exteriorColor: getExteriorColorToSet(),
+            parkingSensors: parkingSensors.filter(item => item.isChosen).map(item => item.value),
+            securities: securities.filter(item => item.isChosen).map(item => item.value),
+            headlightsType: headlightsType,
+            tyresAndWheels: tyresAndWheels.filter(item => item.isChosen).map(item => item.value),
+            numberOfDoors: numberOfDoors,
+            interiorColor: getInteriorColorToSet(),
+            interiorMaterial: interiorMaterial,
+            interiorFeatures: interiorFeatures.filter(item => item.isChosen).map(item => item.value),
+            numberOfSeats: numberOfSeats,
+            extras: extras.filter(item => item.isChosen).map(item => item.value),
+            mileage: mileage,
+            manufactureYear: manufactureYear,
+            vin: vin,
+            availability: automobile.availability,
+            actualPrice: actualPrice,
+            expectedSellingPrice: expectedSellingPrice,
+            dealership: dealership,
+            title: title,
+            description: description,
+            created_at: automobile.created_at,
+            modified_at: new Date().toISOString()
+        }
+        AutomobileService.create(newAutomobile);
+        if (!isAvailable) {
+            let newAutomobileInOrder = {
+                id: automobileInOrder.id,
+                description: description,
+                automobile: newAutomobile,
+                expectedArrivalDate: expectedArrivalDate,
+                created_at: automobileInOrder.created_at,
+                modified_at: new Date().toISOString()
+            }
+            AutomobileInOrderService.create(newAutomobileInOrder)
+        }
+    }
 
     const toggleTyresAndWheels = index => {
         const newData = [...tyresAndWheels];
@@ -660,6 +662,7 @@ const AutomobileEditComponent = (props) => {
                                                 <option>Напівавтомат</option>
                                             </select>
                                         </label>
+                                        <br/>
                                         <label>Об'єм двигуна
                                             <input
                                                 type="text"
@@ -724,6 +727,7 @@ const AutomobileEditComponent = (props) => {
                                                 <option>Звичайні</option>
                                             </select>
                                         </label>
+                                        <br/>
                                         <label>VIN-код
                                             <input
                                                 type="text"
@@ -897,19 +901,13 @@ const AutomobileEditComponent = (props) => {
                                 )}
                             </EmployeeSelectDealership>
                             }
-                            <label><input
-                                readOnly
-                                type="checkbox"
-                                checked={isAvailable}
-                                onClick={() => setIsAvailable(!isAvailable)}
-                            />
-                                Автомобіль вже в наявності
-                            </label><br/>
                             {
-                                !isAvailable &&
+                                automobile !== null &&
+                                automobile.availability === "Замовлений" &&
                                 <label>Очікувана дата прибуття
                                     <input type="date"
                                            className="form-control"
+                                           value={expectedArrivalDate}
                                            onChange={(event) =>
                                                setExpectedArrivalDate(event.target.value)}
                                            min={moment().format("YYYY-MM-DD")}/>
@@ -950,7 +948,10 @@ const AutomobileEditComponent = (props) => {
                     </Card>
                     <div className="m-3">
                         <Button variant="success" onClick={(event) => add(event)}>
+                            <NavLink to={`/automobile/get/${id}`}
+                            style={{color:"white", textDecoration: "none"}}>
                             Save
+                            </NavLink>
                         </Button>
                     </div>
                 </CardDeck>

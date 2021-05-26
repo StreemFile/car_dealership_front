@@ -61,7 +61,7 @@ const EmployeeEditModalComponent = (props) => {
     return (
         <Modal show={props.show} onHide={props.handleClose} animation={true}>
             <Modal.Header>
-                <Modal.Title>Add model</Modal.Title>
+                <Modal.Title>Edit employee</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form autoComplete="off">

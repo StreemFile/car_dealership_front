@@ -16,6 +16,8 @@ import AutomobileComponent from "./components/automobile/AutomobileComponent";
 import AutomobileByIdComponent from "./components/automobile/AutomobileByIdComponent";
 import AutomobileAddComponent from "./components/automobile/AutomobileAddComponent";
 import AutomobileEditComponent from "./components/automobile/AutomobileEditComponent";
+import PurchaseComponent from "./components/purchase/PurchaseComponent";
+import PurchaseByIdComponent from "./components/purchase/PurchaseByIdComponent";
 
 function App() {
 
@@ -41,9 +43,14 @@ function App() {
                     <Route path="/automobileSpecifications" exact component={AutomobileSpecificationComponent}/>
                     <Route path="/employees" exact component={EmployeeComponent}/>
                     <Route path="/automobiles" exact component={AutomobileComponent}/>
+                    <Route path="/orderedAutomobiles" exact render={() => <AutomobileComponent autosToGet="Замовлений"/>}/>
+                    <Route path="/inStockAutomobiles" exact render={() => <AutomobileComponent autosToGet="В наявності"/>}/>
+                    <Route path="/soldAutomobiles" exact render={() => <AutomobileComponent autosToGet="Проданий"/>}/>
                     <Route path="/automobile/get/:id" exact component={AutomobileByIdComponent}/>
                     <Route path="/automobile/edit/:id" exact component={AutomobileEditComponent}/>
                     <Route path="/automobile/add" exact component={AutomobileAddComponent}/>
+                    <Route path="/purchases" exact component={PurchaseComponent}/>
+                    <Route path="/purchase/get/:id" exact component={PurchaseByIdComponent}/>
 
                 </Switch>
                 <FooterComponent/>

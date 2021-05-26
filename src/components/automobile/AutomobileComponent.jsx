@@ -9,9 +9,23 @@ const AutomobileComponent = (props) => {
     const [automobiles, setAutomobiles] = useState([]);
 
     useEffect(() => {
-        AutomobileService.getAll().then(result => {
-            setAutomobiles(result.data);
-        })
+        if(props.autosToGet === "Замовлений"){
+            AutomobileService.getAll().then(result => {
+                setAutomobiles(result.data.filter(item => item.availability === "Замовлений"));
+            })
+        } else if(props.autosToGet === "Проданий"){
+            AutomobileService.getAll().then(result => {
+                setAutomobiles(result.data.filter(item => item.availability === "Проданий"));
+            })
+        } else if(props.autosToGet === "В наявності") {
+            AutomobileService.getAll().then(result => {
+                setAutomobiles(result.data.filter(item => item.availability === "В наявності"));
+            })
+        } else {
+            AutomobileService.getAll().then(result => {
+                setAutomobiles(result.data);
+            })
+        }
     }, [automobiles])
 
     if (automobiles.length === 0) {

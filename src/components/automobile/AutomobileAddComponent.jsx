@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import DatePicker from 'react-datetime';
 import {v4 as uuidv4} from 'uuid';
 import {AutomobileAddWrapper, AutomobileInfo} from "../../layouts/automobile/AutomobileLayout";
-import {Button, Card, CardDeck} from "react-bootstrap";
+import {Button, Card, CardDeck, Modal} from "react-bootstrap";
 import VehicleTypeService from "../../service/VehicleTypeService";
 import MakeService from "../../service/MakeService";
 import ModelAndPackageService from "../../service/ModelAndPackageService";
@@ -19,6 +18,7 @@ import DealershipService from "../../service/DealershipService";
 import {EmployeeSelectDealership} from "../../layouts/employee/EmployeeLayout";
 import moment from "moment";
 import AutomobileInOrderService from "../../service/AutomobileInOrderService";
+import {NavLink} from "react-router-dom";
 
 const AutomobileAddComponent = (props) => {
     const [vehicleTypeOptions, setVehicleTypeOptions] = useState([]);
@@ -872,11 +872,14 @@ const AutomobileAddComponent = (props) => {
                             </AutomobileInfo>
                         </Card.Text>
                     </Card>
-                    <div className="m-3">
-                        <Button variant="success" onClick={(event) => add(event)}>
+                    <Button className="m-3"
+                            variant="success"
+                            onClick={(event) => add(event)}
+                    >
+                        <NavLink to="/automobiles" style={{color:"white", textDecoration:"none"}}>
                             Save
-                        </Button>
-                    </div>
+                        </NavLink>
+                    </Button>
                 </CardDeck>
             </form>
         </AutomobileAddWrapper>

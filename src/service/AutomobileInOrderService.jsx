@@ -35,6 +35,9 @@ class AutomobileInOrderService extends Component {
     delete(id){
         return axios.get(AUTOMOBILE_IN_ORDER_API_BASE_URL + "/delete/" + id);
     }
+    deleteByAutomobileId(id){
+        return axios.get(AUTOMOBILE_IN_ORDER_API_BASE_URL + "/delete/by-automobile-" + id);
+    }
 
     render() {
         return (

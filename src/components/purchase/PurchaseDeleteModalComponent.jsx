@@ -2,43 +2,42 @@ import React, {useState} from 'react';
 import {Alert, Button, Modal} from "react-bootstrap";
 import { useHistory } from 'react-router-dom'
 
-const DealershipDeleteModalComponent = (props) => {
-    const [city, setCity] = useState("");
+const PurchaseDeleteModalComponent = (props) => {
     const history = useHistory();
+    const [soldPrice, setPrice] = useState("");
 
-    const [isCityWrittenRight, setIsCityWrittenRight] = useState(true);
+    const [isPurchaseWrittenRight, setIsPurchaseWrittenRight] = useState(true);
 
     const deleteObject = () => {
-        if (props.object.city === city) {
-            props.service.delete(props.object.id);
-            props.rerenderNavbar(true);
-            setIsCityWrittenRight(true);
-            setCity("");
+        if (props.purchase.soldPrice.toString() === soldPrice) {
+            props.service.delete(props.purchase.id);
+            setIsPurchaseWrittenRight(true);
+            setPrice("");
             props.handleClose();
-            history.push("/dealerships")
+            history.push("/purchases")
         } else {
-            setIsCityWrittenRight(false);
+            setIsPurchaseWrittenRight(false);
         }
     }
 
     return (
         <Modal show={props.show} onHide={props.handleClose} animation={true}>
             <Modal.Header>
-                <Modal.Title>Delete dealership</Modal.Title>
+                <Modal.Title>Delete purchase</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {
-                    !isCityWrittenRight
+                    !isPurchaseWrittenRight
                     && <Alert variant="danger">
                         Невірно введені дані!
                     </Alert>}
-                Щоб видалити об'єкт введіть <strong>{props.object.city}</strong>
+                Щоб видалити об'єкт введіть <strong>{props.purchase.soldPrice}</strong>
                 <br/>
                 <form autoComplete="off">
                     <input
-                        type="text" value={city}
+                        type="text" value={soldPrice}
                         onChange={(event) =>
-                            setCity(event.target.value)}
+                            setPrice(event.target.value)}
                         className="form-control m-3"
                         style={{width: "93%"}}/>
                 </form>
@@ -55,4 +54,4 @@ const DealershipDeleteModalComponent = (props) => {
     );
 }
 
-export default DealershipDeleteModalComponent;
+export default PurchaseDeleteModalComponent;

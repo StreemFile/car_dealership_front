@@ -23,7 +23,10 @@ const AutomobileGeneralInfoComponent = (props) => {
                 <p>Тип кузова: {props.automobile.vehicleType.name}</p>
                 <p>Марка: {props.automobile.modelAndPackage.make.name}</p>
                 <p>Модель: {props.automobile.modelAndPackage.model}</p>
-                <p>Комплектація: {props.automobile.modelAndPackage.pack}</p>
+                {
+                    props.automobile.modelAndPackage.pack !== "" &&
+                    <p>Комплектація: {props.automobile.modelAndPackage.pack}</p>
+                }
                 <p>Країна пригнання: {props.automobile.exportedFrom.name}</p>
                 <p>Наявність: {props.automobile.availability}</p>
                 {expectedArrivalDate !== null
