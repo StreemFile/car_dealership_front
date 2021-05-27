@@ -15,6 +15,7 @@ const AutomobileInfoCardsComponent = (props) => {
                             <p>Тип кузова: {props.vehicleType}</p>
                             <p>Марка: {props.make}</p>
                             <p>Модель: {props.model}</p>
+                            <p>Місто: {props.city}</p>
                         </div>
                         <div>
                             <p>Рік випуску: {props.year}</p>

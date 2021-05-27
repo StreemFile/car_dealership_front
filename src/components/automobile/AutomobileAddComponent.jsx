@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {AutomobileAddWrapper, AutomobileInfo} from "../../layouts/automobile/AutomobileLayout";
-import {Button, Card, CardDeck, Modal} from "react-bootstrap";
+import {Button, Card, CardDeck} from "react-bootstrap";
 import VehicleTypeService from "../../service/VehicleTypeService";
 import MakeService from "../../service/MakeService";
 import ModelAndPackageService from "../../service/ModelAndPackageService";
@@ -54,9 +54,6 @@ const AutomobileAddComponent = (props) => {
         setMake(event.target.value);
         setModel("");
         setPack("");
-        console.log("dasdsa")
-        console.log(model)
-        console.log(pack)
         if (event.target.value.length > 0) {
             setIsModelDisabled(false);
         } else {

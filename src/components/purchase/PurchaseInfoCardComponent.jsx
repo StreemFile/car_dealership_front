@@ -12,6 +12,7 @@ const PurchaseInfoCardComponent = (props) => {
                     <p>Покупець: {props.customerName}</p>
                     <p>Продавець: {props.employeeName}</p>
                     <p>Автосалон: {props.city}</p>
+                    <p>Дата продажі: {props.date}</p>
                 </Card.Text>
                 <NavLink to={`/purchase/get/${props.id}`}>
                     <Button variant="primary">Деталі</Button>

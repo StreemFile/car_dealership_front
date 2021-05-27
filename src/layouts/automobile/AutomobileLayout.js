@@ -35,3 +35,8 @@ export const AutomobileAddWrapper = styled.div`
   border-radius: 5px;
   background-color: white;
 `
+export const SearchButton = styled.div`
+  position: fixed;
+  top: 10%;
+  left: 70%;
+`

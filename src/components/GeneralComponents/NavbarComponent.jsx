@@ -40,6 +40,7 @@ const NavbarComponent = (props) => {
                         <NavDropdown.Item to="/automobiles" as={NavLink}>Всі</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item to="/automobile/add" as={NavLink}>Додати</NavDropdown.Item>
+                        <NavDropdown.Item to="/automobile/search" as={NavLink}>Пошук</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Nav>
@@ -47,6 +48,7 @@ const NavbarComponent = (props) => {
                     <Nav.Link to="/customers" as={NavLink}>Клієнти</Nav.Link>
                     <Nav.Link to="/employees" as={NavLink}>Працівники</Nav.Link>
                     <Nav.Link to="/purchases" as={NavLink}>Продажі</Nav.Link>
+                    <Nav.Link to="/requests" as={NavLink}>Запити</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

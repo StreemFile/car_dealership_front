@@ -18,16 +18,26 @@ import AutomobileAddComponent from "./components/automobile/AutomobileAddCompone
 import AutomobileEditComponent from "./components/automobile/AutomobileEditComponent";
 import PurchaseComponent from "./components/purchase/PurchaseComponent";
 import PurchaseByIdComponent from "./components/purchase/PurchaseByIdComponent";
+import AutomobileOrderedComponent from "./components/automobile/AutomobileOrderedComponent";
+import AutomobileSoldComponent from "./components/automobile/AutomobileSoldComponent";
+import AutomobileInStockComponent from "./components/automobile/AutomobileInStockComponent";
+import AutomobileSearchComponent from "./components/automobile/AutomobileSearchComponent";
+import SearchedAutomobilesComponent from "./components/automobile/SearchedAutomobilesComponent";
+import ScrollToTop from "./ScrollToTop";
+import RequestComponent from "./components/request/RequestComponent";
 
 function App() {
 
     const [isNeededToRerenderNavbar, setIsNeededToRerenderNavbar] = useState(false);
+    const [automobiles, setAutomobiles] = useState([]);
+    const [filters, setFilters] = useState({});
 
     const rerenderNavbar = (boolean) => setIsNeededToRerenderNavbar(boolean)
 
     return (
         <BrowserRouter>
             <MainWrapper>
+                <ScrollToTop />
                 <NavbarComponent
                     isRerendered={isNeededToRerenderNavbar}
                     rerenderNavbar={rerenderNavbar}
@@ -43,14 +53,17 @@ function App() {
                     <Route path="/automobileSpecifications" exact component={AutomobileSpecificationComponent}/>
                     <Route path="/employees" exact component={EmployeeComponent}/>
                     <Route path="/automobiles" exact component={AutomobileComponent}/>
-                    <Route path="/orderedAutomobiles" exact render={() => <AutomobileComponent autosToGet="Замовлений"/>}/>
-                    <Route path="/inStockAutomobiles" exact render={() => <AutomobileComponent autosToGet="В наявності"/>}/>
-                    <Route path="/soldAutomobiles" exact render={() => <AutomobileComponent autosToGet="Проданий"/>}/>
+                    <Route path="/orderedAutomobiles" exact render={() => <AutomobileOrderedComponent/>}/>
+                    <Route path="/inStockAutomobiles" exact render={() => <AutomobileInStockComponent/>}/>
+                    <Route path="/soldAutomobiles" exact render={() => <AutomobileSoldComponent/>}/>
                     <Route path="/automobile/get/:id" exact component={AutomobileByIdComponent}/>
                     <Route path="/automobile/edit/:id" exact component={AutomobileEditComponent}/>
                     <Route path="/automobile/add" exact component={AutomobileAddComponent}/>
+                    <Route path="/automobile/foundAutomobiles" exact  render={() => <SearchedAutomobilesComponent filters={filters} automobiles={automobiles}/>}/>
+                    <Route path="/automobile/search" exact  render={() => <AutomobileSearchComponent setAutomobiles={setAutomobiles} setFilters={setFilters}/>}/>
                     <Route path="/purchases" exact component={PurchaseComponent}/>
                     <Route path="/purchase/get/:id" exact component={PurchaseByIdComponent}/>
+                    <Route path="/requests" exact component={RequestComponent}/>
 
                 </Switch>
                 <FooterComponent/>
