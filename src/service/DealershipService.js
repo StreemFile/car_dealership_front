@@ -36,6 +36,10 @@ class DealershipService extends Component {
         return axios.get(DEALERSHIP_API_BASE_URL + "/getIdByEnglishCityName/" + city)
     }
 
+    getTotalSalaries(){
+        return axios.get(DEALERSHIP_API_BASE_URL + "/totalSalaries");
+    }
+
     render() {
         return (
             <div>

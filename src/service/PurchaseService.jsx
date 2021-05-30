@@ -31,6 +31,13 @@ class PurchaseService extends Component {
         return axios.get(PURCHASE_API_BASE_URL + "/delete/" + id);
     }
 
+    getByDates(after,before){
+        return axios.get(PURCHASE_API_BASE_URL + `/getByDates/after=${after}_before=${before}`);
+    }
+
+    groupAndCountMakes(){
+        return axios.get(PURCHASE_API_BASE_URL + "/countAndGroupMakes");
+    }
     render() {
         return (
             <div>
