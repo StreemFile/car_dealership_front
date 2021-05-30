@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/employees"
-// const EMPLOYEE_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/employees"
+// const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/employees"
+const EMPLOYEE_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/employees"
 
 class EmployeeService extends Component {
     constructor(props) {

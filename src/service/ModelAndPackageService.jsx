@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from "axios";
 
-const MODEL_AND_PACKAGE_API_BASE_URL = "http://localhost:8080/api/modelAndPackages";
-// const MODEL_AND_PACKAGE_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/modelAndPackages";
+// const MODEL_AND_PACKAGE_API_BASE_URL = "http://localhost:8080/api/modelAndPackages";
+const MODEL_AND_PACKAGE_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/modelAndPackages";
 
 class ModelAndPackageService extends Component{
 

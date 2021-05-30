@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-const PURCHASE_API_BASE_URL = "http://localhost:8080/api/purchases"
-// const PURCHASE_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/purchase"
+// const PURCHASE_API_BASE_URL = "http://localhost:8080/api/purchases"
+const PURCHASE_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/purchases"
 
 class PurchaseService extends Component {
     constructor(props) {

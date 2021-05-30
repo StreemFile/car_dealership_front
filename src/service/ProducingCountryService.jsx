@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from "axios";
 
-const PRODUCING_COUNTRY_API_BASE_URL = "http://localhost:8080/api/producingCountries";
-// const PRODUCING_COUNTRY_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/producingCountries";
+// const PRODUCING_COUNTRY_API_BASE_URL = "http://localhost:8080/api/producingCountries";
+const PRODUCING_COUNTRY_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/producingCountries";
 
 class ProducingCountryService extends Component{
 

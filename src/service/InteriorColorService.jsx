@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from "axios";
 
-const INTERIOR_COLOR_API_BASE_URL = "http://localhost:8080/api/interiorColors";
-// const INTERIOR_COLOR_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/interiorColors";
+// const INTERIOR_COLOR_API_BASE_URL = "http://localhost:8080/api/interiorColors";
+const INTERIOR_COLOR_API_BASE_URL = "https://car-dealership-cw.herokuapp.com/api/interiorColors";
 
 class InteriorColorService extends Component {
     constructor(props) {
